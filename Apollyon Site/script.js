@@ -1139,8 +1139,16 @@
       
       const mod = input({ type: "number", value: 0 });
       const temp = input({ type: "number", value: 0 });
+      
+      // Attribute multiplier count input (0-4)
+      const attrCount = input({ type: "number", value: 0, min: 0, max: 4, className: "w-12" });
+      
       const mult = input({ type: "number", value: 1, step: "0.01", max: 9.99, className: "w-14" });
       const end = input({ type: "number", value: 0, readOnly: true });
+
+      // Container for attribute multipliers
+      const attrMultipliersContainer = el("div", "mt-1 space-y-1 px-2 py-1 bg-gray-800/30 rounded-lg");
+      attrMultipliersContainer.style.display = "none"; // Initially hidden
 
       const extraTd = el("td", "py-1 pr-1");
       if (def.extra === "HP") {
@@ -1157,6 +1165,50 @@
         currentWrap.appendChild(currentValue);
         currentWrap.appendChild(currentLabel);
         extraTd.appendChild(currentWrap);
+      }
+
+      // Function to create attribute multiplier elements
+      function createAttrMultiplierElements() {
+        const attrSelect = select(["Str", "Agi", "Gri", "Spi"], { className: "w-16 text-xs" });
+        const multInput = input({ type: "number", value: 1, step: "0.01", className: "w-16" });
+        
+        return { attrSelect, multInput };
+      }
+
+      // Function to update attribute multipliers display
+      function updateAttrMultipliers() {
+        const count = Number(attrCount.value || 0);
+        attrMultipliersContainer.innerHTML = "";
+        
+        if (count > 0) {
+          attrMultipliersContainer.style.display = "block";
+          
+          // Create a single row container for all multipliers
+          const multiplierRow = el("div", "flex gap-4 items-center flex-wrap");
+          
+          for (let i = 0; i < count; i++) {
+            const { attrSelect, multInput } = createAttrMultiplierElements();
+            
+            // Create a group for each multiplier pair
+            const multiplierGroup = el("div", "flex gap-1 items-center");
+            multiplierGroup.appendChild(attrSelect);
+            multiplierGroup.appendChild(el("span", "text-xs text-gray-400", "×"));
+            multiplierGroup.appendChild(multInput);
+            
+            multiplierRow.appendChild(multiplierGroup);
+            
+            // Add event listeners for recalculation
+            [attrSelect, multInput].forEach(input => {
+              input.addEventListener("input", recalc);
+            });
+          }
+          
+          attrMultipliersContainer.appendChild(multiplierRow);
+        } else {
+          attrMultipliersContainer.style.display = "none";
+        }
+        
+        recalc();
       }
 
       const recalc = () => {
@@ -1183,13 +1235,47 @@
           base.value = Number(speedTotal);
         }
         
-        const sum = Number(base.value || 0) + Number(mod.value || 0) + Number(temp.value || 0);
+        // Calculate attribute multipliers
+        let attrSum = 0;
+        const multiplierGroups = attrMultipliersContainer.querySelectorAll("div.flex.gap-1");
+        multiplierGroups.forEach(group => {
+          const attrSelect = group.querySelector("select");
+          const multInput = group.querySelector("input[type='number']");
+          
+          if (attrSelect && multInput) {
+            const attrType = attrSelect.value;
+            const multiplier = Number(multInput.value || 0);
+            
+            // Get the corresponding core attribute value
+            let coreAttrValue = 0;
+            if (attrType === "Str") {
+              const strengthRow = document.querySelector('#coreAttributes tr:nth-child(1)'); // Strength is 1st core attribute
+              coreAttrValue = strengthRow ? Number(strengthRow.querySelectorAll('input')[4].value || 0) : 0;
+            } else if (attrType === "Agi") {
+              const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility is 2nd core attribute
+              coreAttrValue = agilityRow ? Number(agilityRow.querySelectorAll('input')[4].value || 0) : 0;
+            } else if (attrType === "Gri") {
+              const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit is 3rd core attribute
+              coreAttrValue = gritRow ? Number(gritRow.querySelectorAll('input')[4].value || 0) : 0;
+            } else if (attrType === "Spi") {
+              const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit is 4th core attribute
+              coreAttrValue = spiritRow ? Number(spiritRow.querySelectorAll('input')[4].value || 0) : 0;
+            }
+            
+            attrSum += coreAttrValue * multiplier;
+          }
+        });
+        
+        const sum = Number(base.value || 0) + Number(mod.value || 0) + Number(temp.value || 0) + attrSum;
         const m = Number(mult.value || 1);
         end.value = Math.ceil(sum * m);
       };
 
       // Add event listeners
-      [base, mod, temp, mult].forEach((i) => i.addEventListener("input", recalc));
+      [base, mod, temp, mult, attrCount].forEach((i) => i.addEventListener("input", recalc));
+      
+      // Special handling for attrCount to update multipliers display
+      attrCount.addEventListener("input", updateAttrMultipliers);
       
       // For calculated base values, also listen to core attribute changes
       if (def.key === "Max HP" || def.key === "BP" || def.key === "AC" || def.key === "Speed") {
@@ -1202,7 +1288,8 @@
       
       recalc();
 
-      [base, mod, temp, mult, end].forEach((ctrl) => {
+      // Create the main row cells
+      [base, mod, temp, attrCount, mult, end].forEach((ctrl) => {
         const td = el("td", "py-1 pr-1");
         const ctrlWrap = el("div", "");
         ctrlWrap.appendChild(ctrl);
@@ -1214,7 +1301,20 @@
       });
 
       tr.appendChild(extraTd);
+      
+      // Add empty cell for multipliers column in main row
+      const emptyAttrTd = el("td", "py-1 pr-1", "");
+      tr.appendChild(emptyAttrTd);
+      
       tbody.appendChild(tr);
+      
+      // Add the attribute multipliers container as a separate row
+      const attrRow = el("tr", "");
+      const attrTd = el("td", "py-0 pr-1", "");
+      attrTd.colSpan = 9; // Span across all columns
+      attrTd.appendChild(attrMultipliersContainer);
+      attrRow.appendChild(attrTd);
+      tbody.appendChild(attrRow);
     });
   }
 
@@ -1318,6 +1418,7 @@
   /** Add a new ability to a mote. */
   function addMoteAbility(abilitiesWrap, moteSel) {
     const abilityCard = el("div", "pt-4 pb-8 px-4 rounded-xl border relative");
+    abilityCard.id = `mote-ability-${Date.now()}`;
     // Apply mote theme
     const themeClass = getMoteThemeClass(moteSel.value);
     abilityCard.classList.add(themeClass);
@@ -1415,6 +1516,9 @@
     abilityCard.appendChild(descContainer);
     abilitiesWrap.appendChild(abilityCard);
     
+    // Add drag handle
+    addDragHandle(abilityCard);
+    
     // Update delete button visibility and validate selections
     updateDeleteButtons(abilitiesWrap);
     validateAbilitySelections();
@@ -1443,6 +1547,7 @@
     const enhancements = document.getElementById("enhancements");
     const newEnhancement = document.createElement("div");
     newEnhancement.className = "p-3 rounded-xl border border-white/10 bg-white/5 relative";
+    newEnhancement.id = `enhancement-${Date.now()}`;
     
     // Create delete button (only if there's more than one enhancement)
     const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
@@ -1456,13 +1561,19 @@
       }
     };
     
-    // Create form fields in a grid layout with effect field taking more space
-    const fieldsContainer = el("div", "grid grid-cols-6 gap-2 pr-8");
+    // Create form fields with custom layout: Name (full row), Cost+Item (same row), Effect (full row)
+    const fieldsContainer = el("div", "space-y-3 pr-8");
     
     const nameField = input({ placeholder: "Name", className: "w-full" });
+    
+    // Cost and Item on the same row
+    const costItemRow = el("div", "grid grid-cols-2 gap-2");
     const costField = input({ type: "text", placeholder: "Cost", className: "w-full" });
     const itemField = input({ placeholder: "Item", className: "w-full" });
-    const effectField = textarea({ placeholder: "Effect", rows: 1, className: "w-full resize-none overflow-hidden col-span-3" });
+    costItemRow.appendChild(costField);
+    costItemRow.appendChild(itemField);
+    
+    const effectField = textarea({ placeholder: "Effect", rows: 1, className: "w-full resize-none overflow-hidden" });
     
     // Function to auto-resize textarea based on content
     function autoResizeTextarea() {
@@ -1481,14 +1592,16 @@
     });
     
     fieldsContainer.appendChild(nameField);
-    fieldsContainer.appendChild(costField);
-    fieldsContainer.appendChild(itemField);
+    fieldsContainer.appendChild(costItemRow);
     fieldsContainer.appendChild(effectField);
     
     // Assemble the enhancement
     newEnhancement.appendChild(deleteBtn);
     newEnhancement.appendChild(fieldsContainer);
     enhancements.appendChild(newEnhancement);
+    
+    // Add drag handle
+    addDragHandle(newEnhancement);
     
     // Update delete button visibility
     updateEnhancementDeleteButtons();
@@ -1505,6 +1618,7 @@
         deleteBtn.style.display = enhancementCards.length > 1 ? "flex" : "none";
       }
     });
+    
   }
 
   /** Build Masteries (start with one). */
@@ -1518,6 +1632,7 @@
     const masteries = document.getElementById("masteries");
     const newMastery = document.createElement("div");
     newMastery.className = "p-3 rounded-xl border border-white/10 bg-white/5 relative";
+    newMastery.id = `mastery-${Date.now()}`;
     
     // Create delete button (only if there's more than one mastery)
     const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
@@ -1545,8 +1660,62 @@
     newMastery.appendChild(fieldsContainer);
     masteries.appendChild(newMastery);
     
+    // Add drag handle
+    addDragHandle(newMastery);
+    
     // Update delete button visibility
     updateMasteryDeleteButtons();
+  }
+
+  /** Add a new trigger card when user clicks the button. */
+  function addTrigger() {
+    const triggers = document.getElementById("triggers");
+    const newTrigger = document.createElement("div");
+    newTrigger.className = "p-4 rounded-xl border border-white/10 bg-white/5 relative";
+    newTrigger.id = `trigger-${Date.now()}`;
+    
+    // Create delete button for the entire trigger card
+    const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
+    deleteBtn.innerHTML = "×";
+    deleteBtn.title = "Delete trigger";
+    deleteBtn.onclick = () => newTrigger.remove();
+    
+    // Create trigger name input (large)
+    const nameField = input({ placeholder: "Trigger Name", className: "w-full text-lg font-semibold mb-3" });
+    
+    // Create elements container
+    const elementsContainer = el("div", "space-y-2 mb-3");
+    elementsContainer.id = `trigger-elements-${Date.now()}`;
+    
+    // Create add element button
+    const addElementBtn = el("button", "w-full rounded-lg px-3 py-2 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30 text-cyan-300 text-sm");
+    addElementBtn.textContent = "Add Element";
+    addElementBtn.onclick = () => addTriggerElement(elementsContainer);
+    
+    // Assemble the trigger card
+    newTrigger.appendChild(deleteBtn);
+    newTrigger.appendChild(nameField);
+    newTrigger.appendChild(elementsContainer);
+    newTrigger.appendChild(addElementBtn);
+    triggers.appendChild(newTrigger);
+    
+    // Add drag handle
+    addDragHandle(newTrigger);
+  }
+
+  /** Add a new element to a trigger card. */
+  function addTriggerElement(container) {
+    const elementDiv = el("div", "flex gap-2 items-center p-2 rounded-lg bg-gray-800/30 border border-white/5");
+    
+    const elementInput = input({ placeholder: "Element", className: "flex-1" });
+    const deleteElementBtn = el("button", "w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
+    deleteElementBtn.innerHTML = "×";
+    deleteElementBtn.title = "Delete element";
+    deleteElementBtn.onclick = () => elementDiv.remove();
+    
+    elementDiv.appendChild(elementInput);
+    elementDiv.appendChild(deleteElementBtn);
+    container.appendChild(elementDiv);
   }
 
   /** Update mastery delete button visibility based on number of masteries. */
@@ -1560,6 +1729,7 @@
         deleteBtn.style.display = masteryCards.length > 1 ? "flex" : "none";
       }
     });
+    
   }
 
   /** Build Mind Alterations rows (fixed at 3). */
@@ -1607,6 +1777,8 @@
       masteries: [],
       // Mastery value
       masteryValue: "",
+      // Triggers
+      triggers: [],
       // Mind alterations
       mindAlterations: [],
       // Mind breaks
@@ -1630,18 +1802,47 @@
 
     // Collect calculated attributes
     const calcRows = document.querySelectorAll('#calcAttributes tr');
-    calcRows.forEach(row => {
+    let currentAttrIndex = 0;
+    calcRows.forEach((row, index) => {
+      // Skip attribute multiplier rows (they are odd indices after the main rows)
+      if (index % 2 === 1) return;
+      
       const inputs = row.querySelectorAll('input');
-      if (inputs.length >= 5) {
-        const extraInput = row.querySelector('td:last-child input');
+      if (inputs.length >= 6) {
+        const extraInput = row.querySelector('td:nth-last-child(2) input'); // Second to last column
+        const attrCount = inputs[3].value || "0";
+        
+        // Collect attribute multipliers from the next row
+        const attrMultipliers = [];
+        const nextRow = calcRows[index + 1];
+        if (nextRow && Number(attrCount) > 0) {
+          const attrMultipliersContainer = nextRow.querySelector('td div.mt-2');
+          if (attrMultipliersContainer) {
+            const multiplierGroups = attrMultipliersContainer.querySelectorAll('div.flex.gap-1');
+            multiplierGroups.forEach(group => {
+              const attrSelect = group.querySelector('select');
+              const multInput = group.querySelector('input[type="number"]');
+              if (attrSelect && multInput) {
+                attrMultipliers.push({
+                  attr: attrSelect.value || "",
+                  mult: multInput.value || ""
+                });
+              }
+            });
+          }
+        }
+        
         data.calc.push({
           base: inputs[0].value || "",
           mod: inputs[1].value || "",
           temp: inputs[2].value || "",
-          mult: inputs[3].value || "",
-          end: inputs[4].value || "",
+          attrCount: attrCount,
+          attrMultipliers: attrMultipliers,
+          mult: inputs[4].value || "",
+          end: inputs[5].value || "",
           extra: extraInput ? extraInput.value || "" : ""
         });
+        currentAttrIndex++;
       }
     });
 
@@ -1725,6 +1926,30 @@
 
     // Collect mastery value
     data.masteryValue = document.getElementById("masteryValue").value || "";
+
+    // Collect triggers
+    const triggerItems = document.querySelectorAll('#triggers > div');
+    triggerItems.forEach(trigger => {
+      const nameInput = trigger.querySelector('input[placeholder="Trigger Name"]');
+      const elementsContainer = trigger.querySelector('div[class*="space-y-2"]');
+      const elements = [];
+      
+      if (elementsContainer) {
+        const elementInputs = elementsContainer.querySelectorAll('input[placeholder="Element"]');
+        elementInputs.forEach(input => {
+          if (input.value.trim()) {
+            elements.push(input.value.trim());
+          }
+        });
+      }
+      
+      if (nameInput) {
+        data.triggers.push({
+          name: nameInput.value || "",
+          elements: elements
+        });
+      }
+    });
 
     // Collect mind alterations
     const mindAlterationItems = document.querySelectorAll('#mindAlterations > div');
@@ -1914,18 +2139,47 @@
       if (data.calc) {
         const calcRows = document.querySelectorAll('#calcAttributes tr');
         data.calc.forEach((attr, i) => {
-          if (calcRows[i]) {
-            const inputs = calcRows[i].querySelectorAll('input');
-            if (inputs.length >= 5) {
+          const rowIndex = i * 2; // Main rows are at even indices
+          if (calcRows[rowIndex]) {
+            const inputs = calcRows[rowIndex].querySelectorAll('input');
+            if (inputs.length >= 6) {
               inputs[0].value = attr.base || "";
               inputs[1].value = attr.mod || "";
               inputs[2].value = attr.temp || "";
-              inputs[3].value = attr.mult || "";
-              inputs[4].value = attr.end || "";
+              inputs[3].value = attr.attrCount || "0"; // Attribute count
+              inputs[4].value = attr.mult || "";
+              inputs[5].value = attr.end || "";
             }
-            const extraInput = calcRows[i].querySelector('td:last-child input');
+            const extraInput = calcRows[rowIndex].querySelector('td:nth-last-child(2) input');
             if (extraInput) {
               extraInput.value = attr.extra || "";
+            }
+            
+            // Import attribute multipliers
+            if (attr.attrMultipliers && attr.attrMultipliers.length > 0) {
+              // Trigger the updateAttrMultipliers function by setting the count
+              const attrCountInput = inputs[3];
+              attrCountInput.value = attr.attrCount || "0";
+              attrCountInput.dispatchEvent(new Event('input'));
+              
+              // Wait a moment for the UI to update, then populate the multipliers
+              setTimeout(() => {
+                const nextRow = calcRows[rowIndex + 1];
+                if (nextRow) {
+                  const attrMultipliersContainer = nextRow.querySelector('td div.mt-2');
+                  if (attrMultipliersContainer) {
+                    const multiplierGroups = attrMultipliersContainer.querySelectorAll('div.flex.gap-1');
+                    attr.attrMultipliers.forEach((attrMult, multIndex) => {
+                      if (multiplierGroups[multIndex]) {
+                        const attrSelect = multiplierGroups[multIndex].querySelector('select');
+                        const multInput = multiplierGroups[multIndex].querySelector('input[type="number"]');
+                        if (attrSelect) attrSelect.value = attrMult.attr || "";
+                        if (multInput) multInput.value = attrMult.mult || "";
+                      }
+                    });
+                  }
+                }
+              }, 50);
             }
           }
         });
@@ -2039,6 +2293,33 @@
         document.getElementById("masteryValue").value = data.masteryValue || "";
       }
 
+      // Import triggers
+      if (data.triggers) {
+        clearContainer('#triggers');
+        data.triggers.forEach(trigger => {
+          addTrigger();
+          const lastTrigger = document.querySelector('#triggers > div:last-child');
+          if (lastTrigger) {
+            const nameInput = lastTrigger.querySelector('input[placeholder="Trigger Name"]');
+            const elementsContainer = lastTrigger.querySelector('div[class*="space-y-2"]');
+            
+            if (nameInput) {
+              nameInput.value = trigger.name || "";
+            }
+            
+            if (elementsContainer && trigger.elements) {
+              trigger.elements.forEach(element => {
+                addTriggerElement(elementsContainer);
+                const lastElement = elementsContainer.querySelector('div:last-child input');
+                if (lastElement) {
+                  lastElement.value = element;
+                }
+              });
+            }
+          }
+        });
+      }
+
       // Import mind alterations
       if (data.mindAlterations) {
         clearContainer('#mindAlterations');
@@ -2110,6 +2391,7 @@
     clearContainer('#inventory');
     clearContainer('#enhancements');
     clearContainer('#masteries');
+    clearContainer('#triggers');
     clearContainer('#mindAlterations');
     clearContainer('#mindBreaks');
     
@@ -2276,12 +2558,152 @@
   // =============================
   // Dynamic UI Functions
   // =============================
+
+  // Global variable to store the currently dragged element
+  let draggedElement = null;
+
+  /** Add drag handle to a card element */
+  function addDragHandle(cardElement) {
+    const dragHandle = el("div", "drag-handle");
+    dragHandle.title = "Drag to reorder";
+    
+    // Make the card draggable
+    cardElement.classList.add("draggable-card");
+    cardElement.draggable = true;
+    
+    // Add drag event listeners
+    cardElement.addEventListener('dragstart', handleDragStart);
+    cardElement.addEventListener('dragend', handleDragEnd);
+    cardElement.addEventListener('dragover', handleDragOver);
+    cardElement.addEventListener('drop', handleDrop);
+    
+    // Insert drag handle as first child
+    cardElement.insertBefore(dragHandle, cardElement.firstChild);
+  }
+
+  /** Handle drag start */
+  function handleDragStart(e) {
+    console.log('Drag start:', this.id);
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.outerHTML);
+    e.dataTransfer.setData('text/plain', this.id);
+    draggedElement = this; // Store reference to dragged element
+  }
+
+  /** Handle drag end */
+  function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    // Remove drag-over class from all cards
+    document.querySelectorAll('.draggable-card').forEach(card => {
+      card.classList.remove('drag-over');
+    });
+    draggedElement = null; // Clear dragged element reference
+  }
+
+  /** Handle drag over */
+  function handleDragOver(e) {
+    e.preventDefault();
+    
+    if (draggedElement) {
+      // For mote abilities, check if they're in the same abilities container
+      const draggedAbilitiesContainer = draggedElement.closest('[id$="-abilities"]');
+      const dropAbilitiesContainer = this.closest('[id$="-abilities"]');
+      
+      // For other sections, check if they're in the same section-content
+      const draggedSectionContainer = draggedElement.closest('.section-content');
+      const dropSectionContainer = this.closest('.section-content');
+      
+      console.log('Drag over debug:');
+      console.log('  draggedElement:', draggedElement.id);
+      console.log('  draggedAbilitiesContainer:', draggedAbilitiesContainer ? draggedAbilitiesContainer.id : 'null');
+      console.log('  dropAbilitiesContainer:', dropAbilitiesContainer ? dropAbilitiesContainer.id : 'null');
+      console.log('  draggedSectionContainer:', draggedSectionContainer ? draggedSectionContainer.id : 'null');
+      console.log('  dropSectionContainer:', dropSectionContainer ? dropSectionContainer.id : 'null');
+      
+      // Check if both elements are in the same container (either abilities or section)
+      const sameContainer = (draggedAbilitiesContainer && dropAbilitiesContainer && draggedAbilitiesContainer === dropAbilitiesContainer) ||
+                           (draggedSectionContainer && dropSectionContainer && draggedSectionContainer === dropSectionContainer);
+      
+      console.log('  sameContainer:', sameContainer);
+      
+      if (sameContainer) {
+        e.dataTransfer.dropEffect = 'move';
+        this.classList.add('drag-over');
+      } else {
+        e.dataTransfer.dropEffect = 'none';
+        this.classList.remove('drag-over');
+      }
+    }
+  }
+
+  /** Handle drop */
+  function handleDrop(e) {
+    e.preventDefault();
+    this.classList.remove('drag-over');
+    
+    console.log('Drop:', this.id, 'draggedElement:', draggedElement ? draggedElement.id : 'null');
+    
+    if (draggedElement && draggedElement !== this) {
+      // For mote abilities, check if they're in the same abilities container
+      const draggedAbilitiesContainer = draggedElement.closest('[id$="-abilities"]');
+      const dropAbilitiesContainer = this.closest('[id$="-abilities"]');
+      
+      // For other sections, check if they're in the same section-content
+      const draggedSectionContainer = draggedElement.closest('.section-content');
+      const dropSectionContainer = this.closest('.section-content');
+      
+      console.log('Drop debug:');
+      console.log('  draggedElement:', draggedElement.id);
+      console.log('  draggedAbilitiesContainer:', draggedAbilitiesContainer ? draggedAbilitiesContainer.id : 'null');
+      console.log('  dropAbilitiesContainer:', dropAbilitiesContainer ? dropAbilitiesContainer.id : 'null');
+      console.log('  draggedSectionContainer:', draggedSectionContainer ? draggedSectionContainer.id : 'null');
+      console.log('  dropSectionContainer:', dropSectionContainer ? dropSectionContainer.id : 'null');
+      
+      // Check if both elements are in the same container (either abilities or section)
+      const sameContainer = (draggedAbilitiesContainer && dropAbilitiesContainer && draggedAbilitiesContainer === dropAbilitiesContainer) ||
+                           (draggedSectionContainer && dropSectionContainer && draggedSectionContainer === dropSectionContainer);
+      
+      console.log('  sameContainer:', sameContainer);
+      
+      if (sameContainer) {
+        const container = this.parentNode;
+        const afterElement = getDragAfterElement(container, e.clientY);
+        
+        console.log('Moving element to container:', container.id, 'after:', afterElement ? afterElement.id : 'end');
+        
+        if (afterElement == null) {
+          container.appendChild(draggedElement);
+        } else {
+          container.insertBefore(draggedElement, afterElement);
+        }
+      }
+    }
+  }
+
+  /** Get the element after which to insert the dragged element */
+  function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable-card:not(.dragging)')];
+    
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
   
   /** Add a new mind break card when user clicks the button. */
     function addMindBreak() {
         const mindBreaks = document.getElementById("mindBreaks");
         const newCard = document.createElement("div");
     newCard.className = "p-3 rounded-xl border border-white/10 bg-white/5 relative";
+    newCard.id = `mindbreak-${Date.now()}`;
     
     // Create delete button (only if there's more than one mind break)
     const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
@@ -2305,6 +2727,9 @@
         newCard.appendChild(desc);
         mindBreaks.appendChild(newCard);
     
+    // Add drag handle
+    addDragHandle(newCard);
+    
     // Update delete button visibility
     updateMindBreakDeleteButtons();
   }
@@ -2327,6 +2752,7 @@
     const inventory = document.getElementById("inventory");
     const newItem = document.createElement("div");
     newItem.className = "p-3 rounded-xl border border-white/10 bg-white/5 relative";
+    newItem.id = `inventory-${Date.now()}`;
     
     // Create delete button
     const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
@@ -2343,6 +2769,9 @@
     newItem.appendChild(name);
     newItem.appendChild(desc);
     inventory.appendChild(newItem);
+    
+    // Add drag handle
+    addDragHandle(newItem);
   }
 
   /** Add a new mind alteration item when user clicks the button. */
@@ -2374,6 +2803,7 @@
   window.addEnhancement = addEnhancement;
   window.addMastery = addMastery;
   window.addMindAlteration = addMindAlteration;
+  window.addTrigger = addTrigger;
 
   // =============================
   // Initialize the page

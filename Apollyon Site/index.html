@@ -85,6 +85,65 @@
     .mote-input-grisha option{background:rgba(75, 0, 130, 0.9);color:white;}
     .mote-input-default option{background:rgba(255,255,255,0.9);color:black;}
     
+    /* Dynamic section sizing */
+    .section-dynamic {
+      height: fit-content;
+      transition: all 0.3s ease;
+    }
+    
+    .section-content {
+      transition: all 0.3s ease;
+    }
+
+    /* Drag and drop functionality */
+    .drag-handle {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      width: 20px;
+      height: 20px;
+      cursor: grab;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      z-index: 10;
+    }
+
+    .drag-handle:hover {
+      opacity: 1;
+      color: #d1d5db;
+    }
+
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .draggable-card {
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .dragging {
+      opacity: 0.5;
+      transform: rotate(2deg);
+      z-index: 1000;
+    }
+
+    .drag-over {
+      border-color: #06b6d4;
+      background-color: rgba(6, 182, 212, 0.1);
+    }
+
+    .drag-handle::before {
+      content: "⋮⋮";
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
     @media print {
       body{background:white;color:black}
       .card{background:white;border:1px solid #d1d5db}
@@ -153,9 +212,11 @@
               <th class="pb-2 w-10">Base</th>
               <th class="pb-2 w-10">Mod</th>
               <th class="pb-2 w-10">Temp</th>
+              <th class="pb-2 w-12">Attr</th>
               <th class="pb-2 w-10">× Mult</th>
               <th class="pb-2 w-10">End</th>
               <th class="pb-2 w-12">Current</th>
+              <th class="pb-2 w-20">Multipliers</th>
             </tr>
           </thead>
           <tbody id="calcAttributes"><!-- populated by script.js --></tbody>
@@ -163,65 +224,74 @@
       </div>
     </section>
 
-    <!-- Inventory & Motes -->
-    <section class="grid xl:grid-cols-3 gap-6 mt-6">
-      <!-- Inventory -->
-      <div class="xl:col-span-1 card rounded-2xl p-6">
-        <h3 class="text-lg font-semibold mb-4">Inventory</h3>
-        <div class="space-y-3" id="inventory">
-          <!-- Inventory items will be added here dynamically -->
-        </div>
-        <button id="addInventoryItem" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addInventoryItem()">Add Item</button>
-      </div>
-
-      <!-- Motes -->
-      <div class="xl:col-span-2 grid md:grid-cols-3 gap-6">
+    <!-- Motes - Primary Section -->
+    <section class="mt-6">
+      <h2 class="text-xl font-bold mb-4 text-cyan-300">Motes</h2>
+      <div class="grid lg:grid-cols-3 gap-6">
         <div class="card rounded-2xl p-6" id="mote-1"><!-- built by script.js --></div>
         <div class="card rounded-2xl p-6" id="mote-2"><!-- built by script.js --></div>
         <div class="card rounded-2xl p-6" id="mote-3"><!-- built by script.js --></div>
       </div>
     </section>
 
-    <!-- Enhancements, Mastery & Mind -->
-    <section class="grid lg:grid-cols-3 gap-6 mt-6">
+    <!-- Inventory, Enhancements, Mastery & Triggers -->
+    <section class="grid xl:grid-cols-4 gap-6 mt-6">
+      <!-- Inventory -->
+      <div class="card rounded-2xl p-6 section-dynamic" id="inventory-section">
+        <h3 class="text-lg font-semibold mb-4">Inventory</h3>
+        <div class="space-y-3 section-content" id="inventory">
+          <!-- Inventory items will be added here dynamically -->
+        </div>
+        <button id="addInventoryItem" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addInventoryItem()">Add Item</button>
+      </div>
+
       <!-- Known Enhancements -->
-      <div class="card rounded-2xl p-6">
+      <div class="card rounded-2xl p-6 section-dynamic" id="enhancements-section">
         <h3 class="text-lg font-semibold mb-4">Known Enhancements</h3>
-        <div id="enhancements" class="space-y-3">
+        <div id="enhancements" class="space-y-3 section-content">
           <!-- Enhancement items will be added here dynamically -->
         </div>
         <button id="addEnhancement" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addEnhancement()">Add Enhancement</button>
       </div>
 
       <!-- Mastery -->
-      <div class="card rounded-2xl p-6">
+      <div class="card rounded-2xl p-6 section-dynamic" id="mastery-section">
         <div class="flex items-center gap-3 mb-4">
           <h3 class="text-lg font-semibold">Mastery</h3>
           <input id="masteryValue" type="number" min="0" class="w-16 rounded-lg px-2 py-1 text-center cell ring-0 ring-transparent focus:ring-2 focus:ring-cyan-300" placeholder="0" value="0" />
         </div>
-        <div id="masteries" class="space-y-3">
+        <div id="masteries" class="space-y-3 section-content">
           <!-- Mastery items will be added here dynamically -->
         </div>
         <button id="addMastery" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addMastery()">Add Mastery</button>
       </div>
 
-      <!-- Mind Alterations & Breaks -->
-      <div class="lg:col-span-2 space-y-6">
-        <div class="card rounded-2xl p-6">
-          <h3 class="text-lg font-semibold mb-4">Mind Alterations</h3>
-          <!--3 fillable mind alterations with name and then description box. Each looks visually sepearted by a gray line-->
-          <div id="mindAlterations" class="space-y-3">
-            <!-- Mind alteration rows will be populated by script.js -->
-          </div>
+      <!-- Triggers -->
+      <div class="card rounded-2xl p-6 section-dynamic" id="triggers-section">
+        <h3 class="text-lg font-semibold mb-4">Triggers</h3>
+        <div id="triggers" class="space-y-3 section-content">
+          <!-- Trigger cards will be added here dynamically -->
         </div>
-        <div class="card rounded-2xl p-6">
-          <h3 class="text-lg font-semibold mb-4">Mind Breaks</h3>
-          <!--A box name and description. When filled, it calls a script to add another one. When the description box and name box are empty and the name box and description box of the one above are empty, then it gets removed-->
-          <div id="mindBreaks" class="space-y-3">
-            <!-- Mind break cards will be added here dynamically -->
-          </div>
-          <button id="addMindBreak" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addMindBreak()">Add Mind Break</button>
+        <button id="addTrigger" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addTrigger()">Add Trigger</button>
+      </div>
+    </section>
+
+    <!-- Mind Alterations & Breaks -->
+    <section class="grid lg:grid-cols-2 gap-6 mt-6">
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-lg font-semibold mb-4">Mind Alterations</h3>
+        <!--3 fillable mind alterations with name and then description box. Each looks visually sepearted by a gray line-->
+        <div id="mindAlterations" class="space-y-3">
+          <!-- Mind alteration rows will be populated by script.js -->
         </div>
+      </div>
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-lg font-semibold mb-4">Mind Breaks</h3>
+        <!--A box name and description. When filled, it calls a script to add another one. When the description box and name box are empty and the name box and description box of the one above are empty, then it gets removed-->
+        <div id="mindBreaks" class="space-y-3">
+          <!-- Mind break cards will be added here dynamically -->
+        </div>
+        <button id="addMindBreak" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addMindBreak()">Add Mind Break</button>
       </div>
     </section>
 
