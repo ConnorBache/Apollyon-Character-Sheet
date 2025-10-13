@@ -1868,11 +1868,10 @@
         if (shouldInclude(mote.mote)) c.m = mote.mote;
         if (mote.abilities && mote.abilities.length > 0) {
           c.a = mote.abilities.map(ability => {
-            const a = {};
-            if (shouldInclude(ability.ability)) a.a = ability.ability;
-            if (shouldInclude(ability.desc)) a.d = ability.desc;
-            return a;
-          }).filter(a => Object.keys(a).length > 0);
+            // Only export ability name, not description (can be looked up from database)
+            if (shouldInclude(ability.ability)) return ability.ability;
+            return null;
+          }).filter(a => a !== null);
           if (c.a.length === 0) delete c.a;
         }
         return c;
@@ -2004,10 +2003,31 @@
     if (compact.m && Array.isArray(compact.m)) {
       data.motes = compact.m.map(mote => ({
         mote: mote.m || "",
-        abilities: (mote.a && Array.isArray(mote.a)) ? mote.a.map(ability => ({
-          ability: ability.a || "",
-          desc: ability.d || ""
-        })) : []
+        abilities: (mote.a && Array.isArray(mote.a)) ? mote.a.map(ability => {
+          // Handle different ability formats:
+          // 1. String (new compact format - just ability name)
+          // 2. Object with 'a' and 'd' (old compact format with desc)
+          // 3. Object with 'ability' and 'desc' (legacy format - shouldn't happen here but handle it)
+          if (typeof ability === 'string') {
+            // New format: just the ability name, desc will be looked up during import
+            return {
+              ability: ability,
+              desc: "" // Will be populated from database during import
+            };
+          } else if (ability.a !== undefined) {
+            // Old compact format with description
+            return {
+              ability: ability.a || "",
+              desc: ability.d || ""
+            };
+          } else {
+            // Fallback for any other format
+            return {
+              ability: ability.ability || "",
+              desc: ability.desc || ""
+            };
+          }
+        }) : []
       }));
     }
     
@@ -2527,6 +2547,7 @@
       }
 
       // Import mote abilities
+      const allUnknownAbilities = []; // Collect all unknown abilities across all motes
       if (data.motes) {
         data.motes.forEach((moteData, moteIndex) => {
           const moteNum = moteIndex + 1;
@@ -2557,7 +2578,17 @@
                   
                   // Wait for all abilities to be added, then populate them
                   setTimeout(() => {
-                    populateImportedAbilities(abilitiesWrap, moteSelect, moteData.abilities);
+                    const unknownAbilities = populateImportedAbilities(abilitiesWrap, moteSelect, moteData.abilities);
+                    if (unknownAbilities && unknownAbilities.length > 0) {
+                      allUnknownAbilities.push(...unknownAbilities);
+                    }
+                    
+                    // Show warning if this is the last mote and we have unknown abilities
+                    if (moteIndex === data.motes.length - 1 && allUnknownAbilities.length > 0) {
+                      setTimeout(() => {
+                        showUnknownAbilitiesWarning(allUnknownAbilities);
+                      }, 200);
+                    }
                   }, moteData.abilities.length * 50 + 100);
                 } else {
                   // Add minimum required ability if none exist
@@ -2750,11 +2781,60 @@
     }
   }
 
+  /** Show warning dialog for abilities not found in database */
+  function showUnknownAbilitiesWarning(unknownAbilities) {
+    if (unknownAbilities.length === 0) return;
+    
+    // Create warning dialog
+    const warningBox = document.createElement('div');
+    warningBox.id = 'unknownAbilitiesWarning';
+    warningBox.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 bg-gray-900 border-2 border-yellow-500/50 rounded-xl p-4 z-50 shadow-2xl';
+    
+    let abilityList = unknownAbilities.map(ua => 
+      `<li class="ml-4"><span class="text-cyan-300">${ua.mote}</span> → <span class="text-yellow-300">${ua.ability}</span></li>`
+    ).join('');
+    
+    warningBox.innerHTML = `
+      <div class="flex items-start gap-3 mb-3">
+        <div class="text-yellow-500 text-2xl">⚠</div>
+        <div>
+          <h3 class="text-yellow-300 font-semibold text-lg">Unknown Abilities Detected</h3>
+          <p class="text-sm text-gray-300 mt-1">The following abilities were not found in the database. They have been created with blank descriptions. Please verify and fill in the descriptions manually:</p>
+        </div>
+      </div>
+      <ul class="text-sm text-white max-h-48 overflow-y-auto mb-4 bg-black/30 rounded p-2">
+        ${abilityList}
+      </ul>
+      <div class="flex justify-end">
+        <button id="closeUnknownAbilitiesWarning" class="px-4 py-2 bg-yellow-500/20 border border-yellow-300/30 rounded hover:bg-yellow-500/30 text-yellow-300 text-sm font-semibold">
+          Understood
+        </button>
+      </div>
+    `;
+    
+    document.body.appendChild(warningBox);
+    
+    // Add event listener to close button
+    document.getElementById('closeUnknownAbilitiesWarning').addEventListener('click', () => {
+      warningBox.remove();
+    });
+    
+    // Close on escape key
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        warningBox.remove();
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+  }
+
   /** Populate imported abilities with their data */
   function populateImportedAbilities(abilitiesWrap, moteSelect, abilitiesData) {
     const list = abilitiesByMote[moteSelect.value] || [{"name": "", "desc": "", "details": ""}];
     const abilitySelects = abilitiesWrap.querySelectorAll("select");
     const abilityDescs = abilitiesWrap.querySelectorAll("textarea");
+    const unknownAbilities = []; // Track abilities not found in database
     
     abilitySelects.forEach((sel, index) => {
       sel.innerHTML = "";
@@ -2769,11 +2849,46 @@
       
       // Set the ability selection from imported data
       if (abilitiesData && abilitiesData[index]) {
-        sel.value = abilitiesData[index].ability || "";
+        const importedAbility = abilitiesData[index];
+        const abilityName = importedAbility.ability || "";
+        
+        // Check if the ability exists in the dropdown
+        const abilityExistsInDropdown = Array.from(sel.options).some(opt => opt.value === abilityName);
+        
+        // If ability doesn't exist in dropdown, add it as a custom option
+        if (abilityName && !abilityExistsInDropdown) {
+          const customOption = document.createElement("option");
+          customOption.value = abilityName;
+          customOption.textContent = abilityName + " (Custom)";
+          customOption.dataset.desc = "";
+          customOption.dataset.details = "";
+          sel.appendChild(customOption);
+        }
+        
+        sel.value = abilityName;
         
         // Update description
         if (abilityDescs[index]) {
-          abilityDescs[index].value = abilitiesData[index].desc || "";
+          let descToUse = importedAbility.desc || "";
+          
+          // If description is empty, try to look it up from the database
+          if (!descToUse && abilityName) {
+            // Find the ability in the database
+            const foundAbility = list.find(a => a.name === abilityName);
+            if (foundAbility) {
+              // Found in database, use the database description
+              descToUse = foundAbility.desc || "";
+            } else {
+              // Not found in database, warn the user
+              unknownAbilities.push({
+                mote: moteSelect.value || "Unknown Mote",
+                ability: abilityName
+              });
+              descToUse = ""; // Leave blank for manual entry
+            }
+          }
+          
+          abilityDescs[index].value = descToUse;
           // Trigger auto-resize for textarea
           abilityDescs[index].dispatchEvent(new Event('input'));
         }
@@ -2791,6 +2906,9 @@
     updateDeleteButtons(abilitiesWrap);
     validateMoteSelections();
     validateAbilitySelections();
+    
+    // Return unknown abilities for warning display
+    return unknownAbilities;
   }
 
   /** Validate mote selections to prevent duplicates */
