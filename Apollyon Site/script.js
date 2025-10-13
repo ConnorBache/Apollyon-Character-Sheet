@@ -1754,6 +1754,318 @@
   // Export / Import Functions
   // =============================
 
+  /**
+   * Remove empty strings and zero values from an object
+   */
+  function removeEmptyValues(obj) {
+    if (Array.isArray(obj)) {
+      return obj.map(removeEmptyValues).filter(item => {
+        if (typeof item === 'object' && item !== null) {
+          return Object.keys(item).length > 0;
+        }
+        return true;
+      });
+    } else if (typeof obj === 'object' && obj !== null) {
+      const cleaned = {};
+      for (const [key, value] of Object.entries(obj)) {
+        if (value === "" || value === "0" || value === 0) {
+          // Skip empty strings and zero values
+          continue;
+        }
+        if (Array.isArray(value)) {
+          const cleanedArray = removeEmptyValues(value);
+          if (cleanedArray.length > 0) {
+            cleaned[key] = cleanedArray;
+          }
+        } else if (typeof value === 'object' && value !== null) {
+          const cleanedObj = removeEmptyValues(value);
+          if (Object.keys(cleanedObj).length > 0) {
+            cleaned[key] = cleanedObj;
+          }
+        } else {
+          cleaned[key] = value;
+        }
+      }
+      return cleaned;
+    }
+    return obj;
+  }
+
+  /**
+   * Helper to check if a value should be included in export (not empty or zero)
+   */
+  function shouldInclude(value) {
+    return value !== "" && value !== "0" && value !== 0;
+  }
+
+  /**
+   * Convert full field names to compact one-character field names
+   */
+  function toCompactFormat(data) {
+    const compact = {};
+    
+    // Top-level fields
+    if (shouldInclude(data.name)) compact.n = data.name;
+    if (shouldInclude(data.level)) compact.l = data.level;
+    if (shouldInclude(data.exp)) compact.e = data.exp;
+    if (shouldInclude(data.race)) compact.r = data.race;
+    if (shouldInclude(data.masteryValue)) compact.v = data.masteryValue;
+    
+    // Core attributes
+    if (data.core && data.core.length > 0) {
+      compact.c = data.core.map(attr => {
+        const c = {};
+        if (shouldInclude(attr.base)) c.b = attr.base;
+        if (shouldInclude(attr.mod)) c.m = attr.mod;
+        if (shouldInclude(attr.temp)) c.t = attr.temp;
+        if (shouldInclude(attr.level)) c.l = attr.level;
+        if (shouldInclude(attr.total)) c.o = attr.total;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.c.length === 0) delete compact.c;
+    }
+    
+    // Calculated attributes
+    if (data.calc && data.calc.length > 0) {
+      compact.k = data.calc.map(attr => {
+        const c = {};
+        if (shouldInclude(attr.base)) c.b = attr.base;
+        if (shouldInclude(attr.mod)) c.m = attr.mod;
+        if (shouldInclude(attr.temp)) c.t = attr.temp;
+        if (shouldInclude(attr.attrCount) && attr.attrCount !== "0") c.c = attr.attrCount;
+        if (attr.attrMultipliers && attr.attrMultipliers.length > 0) {
+          c.a = attr.attrMultipliers.map(am => {
+            const a = {};
+            if (shouldInclude(am.attr)) a.a = am.attr;
+            if (shouldInclude(am.mult)) a.m = am.mult;
+            return a;
+          }).filter(a => Object.keys(a).length > 0);
+          if (c.a.length === 0) delete c.a;
+        }
+        if (shouldInclude(attr.mult)) c.u = attr.mult;
+        if (shouldInclude(attr.end)) c.e = attr.end;
+        if (shouldInclude(attr.extra)) c.x = attr.extra;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.k.length === 0) delete compact.k;
+    }
+    
+    // Inventory
+    if (data.inventory && data.inventory.length > 0) {
+      compact.i = data.inventory.map(item => {
+        const c = {};
+        if (shouldInclude(item.name)) c.n = item.name;
+        if (shouldInclude(item.desc)) c.d = item.desc;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.i.length === 0) delete compact.i;
+    }
+    
+    // Motes
+    if (data.motes && data.motes.length > 0) {
+      compact.m = data.motes.map(mote => {
+        const c = {};
+        if (shouldInclude(mote.mote)) c.m = mote.mote;
+        if (mote.abilities && mote.abilities.length > 0) {
+          c.a = mote.abilities.map(ability => {
+            const a = {};
+            if (shouldInclude(ability.ability)) a.a = ability.ability;
+            if (shouldInclude(ability.desc)) a.d = ability.desc;
+            return a;
+          }).filter(a => Object.keys(a).length > 0);
+          if (c.a.length === 0) delete c.a;
+        }
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.m.length === 0) delete compact.m;
+    }
+    
+    // Enhancements
+    if (data.enhancements && data.enhancements.length > 0) {
+      compact.h = data.enhancements.map(enh => {
+        const c = {};
+        if (shouldInclude(enh.name)) c.n = enh.name;
+        if (shouldInclude(enh.cost)) c.c = enh.cost;
+        if (shouldInclude(enh.item)) c.i = enh.item;
+        if (shouldInclude(enh.effect)) c.e = enh.effect;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.h.length === 0) delete compact.h;
+    }
+    
+    // Masteries
+    if (data.masteries && data.masteries.length > 0) {
+      compact.t = data.masteries.map(mast => {
+        const c = {};
+        if (shouldInclude(mast.name)) c.n = mast.name;
+        if (shouldInclude(mast.effect)) c.e = mast.effect;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.t.length === 0) delete compact.t;
+    }
+    
+    // Triggers
+    if (data.triggers && data.triggers.length > 0) {
+      compact.g = data.triggers.map(trig => {
+        const c = {};
+        if (shouldInclude(trig.name)) c.n = trig.name;
+        if (trig.elements && trig.elements.length > 0) {
+          c.e = trig.elements.filter(e => shouldInclude(e));
+          if (c.e.length === 0) delete c.e;
+        }
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.g.length === 0) delete compact.g;
+    }
+    
+    // Mind alterations
+    if (data.mindAlterations && data.mindAlterations.length > 0) {
+      compact.a = data.mindAlterations.map(alt => {
+        const c = {};
+        if (shouldInclude(alt.name)) c.n = alt.name;
+        if (shouldInclude(alt.desc)) c.d = alt.desc;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.a.length === 0) delete compact.a;
+    }
+    
+    // Mind breaks
+    if (data.mindBreaks && data.mindBreaks.length > 0) {
+      compact.b = data.mindBreaks.map(brk => {
+        const c = {};
+        if (shouldInclude(brk.name)) c.n = brk.name;
+        if (shouldInclude(brk.desc)) c.d = brk.desc;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.b.length === 0) delete compact.b;
+    }
+    
+    return compact;
+  }
+
+  /**
+   * Convert compact one-character field names to full field names
+   */
+  function fromCompactFormat(compact) {
+    const data = {
+      name: compact.n || "",
+      level: compact.l || "",
+      exp: compact.e || "",
+      race: compact.r || "",
+      core: [],
+      calc: [],
+      inventory: [],
+      motes: [],
+      enhancements: [],
+      masteries: [],
+      masteryValue: compact.v || "",
+      triggers: [],
+      mindAlterations: [],
+      mindBreaks: []
+    };
+    
+    // Core attributes
+    if (compact.c && Array.isArray(compact.c)) {
+      data.core = compact.c.map(attr => ({
+        base: attr.b || "",
+        mod: attr.m || "",
+        temp: attr.t || "",
+        level: attr.l || "",
+        total: attr.o || ""
+      }));
+    }
+    
+    // Calculated attributes
+    if (compact.k && Array.isArray(compact.k)) {
+      data.calc = compact.k.map(attr => ({
+        base: attr.b || "",
+        mod: attr.m || "",
+        temp: attr.t || "",
+        attrCount: attr.c || "0",
+        attrMultipliers: (attr.a && Array.isArray(attr.a)) ? attr.a.map(am => ({
+          attr: am.a || "",
+          mult: am.m || ""
+        })) : [],
+        mult: attr.u || "",
+        end: attr.e || "",
+        extra: attr.x || ""
+      }));
+    }
+    
+    // Inventory
+    if (compact.i && Array.isArray(compact.i)) {
+      data.inventory = compact.i.map(item => ({
+        name: item.n || "",
+        desc: item.d || ""
+      }));
+    }
+    
+    // Motes
+    if (compact.m && Array.isArray(compact.m)) {
+      data.motes = compact.m.map(mote => ({
+        mote: mote.m || "",
+        abilities: (mote.a && Array.isArray(mote.a)) ? mote.a.map(ability => ({
+          ability: ability.a || "",
+          desc: ability.d || ""
+        })) : []
+      }));
+    }
+    
+    // Enhancements
+    if (compact.h && Array.isArray(compact.h)) {
+      data.enhancements = compact.h.map(enh => ({
+        name: enh.n || "",
+        cost: enh.c || "",
+        item: enh.i || "",
+        effect: enh.e || ""
+      }));
+    }
+    
+    // Masteries
+    if (compact.t && Array.isArray(compact.t)) {
+      data.masteries = compact.t.map(mast => ({
+        name: mast.n || "",
+        effect: mast.e || ""
+      }));
+    }
+    
+    // Triggers
+    if (compact.g && Array.isArray(compact.g)) {
+      data.triggers = compact.g.map(trig => ({
+        name: trig.n || "",
+        elements: trig.e || []
+      }));
+    }
+    
+    // Mind alterations
+    if (compact.a && Array.isArray(compact.a)) {
+      data.mindAlterations = compact.a.map(alt => ({
+        name: alt.n || "",
+        desc: alt.d || ""
+      }));
+    }
+    
+    // Mind breaks
+    if (compact.b && Array.isArray(compact.b)) {
+      data.mindBreaks = compact.b.map(brk => ({
+        name: brk.n || "",
+        desc: brk.d || ""
+      }));
+    }
+    
+    return data;
+  }
+
+  /**
+   * Detect if the imported data is in compact format or legacy format
+   */
+  function isCompactFormat(data) {
+    // Check for compact field names (single characters)
+    // If it has 'n' for name but not 'name', it's compact
+    return (data.n !== undefined || data.c !== undefined || data.k !== undefined) && 
+           (data.name === undefined && data.core === undefined && data.calc === undefined);
+  }
+
   /** Export character data as a simple string format */
   function exportCharacter() {
     const data = {
@@ -1975,8 +2287,9 @@
       }
     });
 
-    // Convert to string and show in text box
-    const exportString = JSON.stringify(data);
+    // Convert to compact format and remove empty values
+    const compactData = toCompactFormat(data);
+    const exportString = JSON.stringify(compactData);
     showExportTextBox(exportString);
   }
 
@@ -2104,7 +2417,15 @@
   async function importCharacterData(importString) {
 
     try {
-      const data = JSON.parse(importString);
+      let rawData = JSON.parse(importString);
+      
+      // Check if data is in compact format and convert if needed
+      let data;
+      if (isCompactFormat(rawData)) {
+        data = fromCompactFormat(rawData);
+      } else {
+        data = rawData;
+      }
       
       // Clear existing data first - ensure complete reset
       clearAllData();
