@@ -55,7 +55,7 @@
       "mote": "Shrail",
       "name": "Vitality of Rage",
       "details": "Gain +3 Grit and +Strength Max HP.",
-      "desc": "+3 Grit, bonus Max HP equal to STR."
+      "desc": "Gain +3 Grit and +Strength Max HP."
     },
     {
       "mote": "Shrail",
@@ -67,31 +67,31 @@
       "mote": "Shrail",
       "name": "Unfeeling Berserker",
       "details": "Gain Strength max BP and 2x Strength HP.",
-      "desc": "Extra Max BP = STR; extra HP = 2×STR."
+      "desc": "Gain Strength max BP and 2x Strength HP."
     },
     {
       "mote": "Shrail",
       "name": "Execute",
-      "details": "Gain the following Boost: [Execute: You may spend 6 boost points when you hit with an attack. You learn whether the attack's maximum possible damage roll is greater than the health of the enemy. If it is, kill them. Otherwise, regain 6 BP.]",
+      "details": "[Boost 6] When you hit with a strike, you learn whether the strike's maximum possible damage roll is greater than the health of the enemy. If it is, kill them. Otherwise, regain 6 BP.",
       "desc": "6 BP: on hit, check if max damage could kill; if yes, enemy dies; if no, refund 6 BP."
     },
     {
       "mote": "Shrail",
       "name": "Rage at the Dying of the Light",
-      "details": "Gain the following Boost: [Un-Die: When you are reduced to 0 HP from damage which is not you, you may spend 1 boost point and stay at one HP. Any HP that you did not actually lose does not count as damage. Once per round when you use this, at the beginning of your next turn this boost costs one more.]",
+      "details": "[Boost 1+N] When you are reduced to 0 HP from damage which is not you, you may stay at one HP. N is the number of rounds other than this one you have used this boost.",
       "desc": "Cheat death to 1 HP (cost increases each round)."
     },
     {
       "mote": "Shrail",
       "name": "Unyielding Assault",
-      "details": "Gain the following Boost: [Rage: When you use a minor action you may spend 3 boost points. Instead of the normal effect of the minor action, you may take an attack action for free. This is considered \"taking a minor action.\"]",
+      "details": "[Boost 3] You may attack as a minor action.]",
       "desc": "Spend 3 BP: convert minor action into free attack."
     },
     {
       "mote": "Shrail",
       "name": "Beat to Death",
-      "details": "Gain the following Boost: [Beatdown: Once per turn, you may spend 1 boost point when taking the punch action to take another punch action.]",
-      "desc": "1 BP: punch again (once/turn)."
+      "details": "[Boost 1] Once per turn when taking the punch action, take another punch action.",
+      "desc": "[Boost 1] Once per turn when taking the punch action, take another punch action."
     },
     {
       "mote": "Shrail",
@@ -109,7 +109,7 @@
       "mote": "Shrail",
       "name": "Fight Long",
       "details": "Gain an additional amount of HP equal to quadruple your Strength.",
-      "desc": "Bonus Max HP = 4×STR."
+      "desc": "Gain an additional amount of HP equal to quadruple your Strength."
     },
     {
       "mote": "Shrail",
@@ -120,7 +120,7 @@
     {
       "mote": "Shrail",
       "name": "Fury Craft",
-      "details": "Learn the following Enhancement: When you attack, as a boost you may spend up to 2 BP, increasing the damage the attack does by 5 for each point. If the creator of this item is wielding it, you may instead spend up to 4 BP.",
+      "details": "Learn the following Enhancement: [Boost X] When you strike, increase the damage of the strike by 5X. You may not increase the damage by more than 10. If you are the creator of this item, you may not increase the damage by more than 20 instead.",
       "desc": "Learn the Fury Craft."
     },
     {
@@ -145,18 +145,18 @@
         "mote": "Pelian",
         "name": "I Will Myself Forward",
         "details": "Gain +3 Strength and you may Dash with Strength instead of Agility.",
-        "desc": "+3 STR; Dash uses STR instead of AGI."
+        "desc": "Gain +3 Strength and you may Dash with Strength instead of Agility."
     },
     {
         "mote": "Pelian",
         "name": "You Have No Right",
-        "details": "Gain the following Boost: [Catch the Arm: When an enemy would damage you, you may spend 1 boost point and double your DR for the rest of the turn.]",
-        "desc": "1 BP: double DR for the turn when damaged."
+        "details": "[Boost 1] When an enemy would damage you, double your DR for the rest of the turn.",
+        "desc": "[Boost 1] When an enemy would damage you, double your DR for the rest of the turn."
     },
     {
         "mote": "Pelian",
         "name": "I Came For You",
-        "details": "Gain the following Boost: [{C} Mark: At the start of your turn you may spend 3 boost points and select an enemy. That enemy cannot apply cleansable debuffs to you, and takes 10 extra damage when you hit them. You may only mark one enemy this way at a time.]",
+        "details": "[Boost 3] {C} At the start of your turn, select an enemy. That enemy cannot apply cleansable debuffs to you, and takes 10 extra damage when you hit them with a strike. You may only mark one enemy this way at a time.",
         "desc": "3 BP: mark an enemy, prevent cleansable debuffs on you, deal +10 damage to them."
     },
     {
@@ -168,8 +168,8 @@
     {
         "mote": "Pelian",
         "name": "Never Without a Fight",
-        "details": "Gain the following Boost: [Take Down With You: When you are damaged, you may spend 3 boost points to take an attack action against whomever damaged you.]",
-        "desc": "3 BP: when damaged, make an attack against the source."
+        "details": "[Boost 3] When you are damaged, take a melee attack action against whomever damaged you.",
+        "desc": "[Boost 3] When you are damaged, take a melee attack action against whomever damaged you."
     },
     {
         "mote": "Pelian",
@@ -181,12 +181,12 @@
         "mote": "Pelian",
         "name": "Bulwark of Mind",
         "details": "Gain an additional amount of HP equal to quadruple your Spirit.",
-        "desc": "Bonus Max HP = 4\u00d7Spirit."
+        "desc": "Gain an additional amount of HP equal to quadruple your Spirit."
     },
     {
         "mote": "Pelian",
         "name": "Never Surrender",
-        "details": "Gain the following Boost: [Refuse: When you are damaged, you may spend 3 boost points to gain half Spirit DR for that damage. If the enemy ignores DR, they instead ignore half DR for that damage.]",
+        "details": "[Boost 3] When you are damaged, gain half Spirit DR for that damage. If the enemy ignores DR, they instead ignore half DR for that damage",
         "desc": "3 BP: gain half Spirit as DR vs that damage (even partly against ignore DR)."
     },
     {
@@ -198,14 +198,14 @@
     {
         "mote": "Pelian",
         "name": "Zeal Craft",
-        "details": "Learn the following Enhancement: Gain 0.3xHP HP rounding up. If you are the creator of this item, after you take damage and your HP is below half, you may spend 4 boost points and regain 1/4 your max HP rounding up. Once you use this ability, it may not be used until the beginning of your next turn.",
+        "details": "Learn the following Enhancement: Your maximum HP is increased by 30 percent. If you are the creator of this item, then in addition you have [Boost 4] If your health is below half after taking damage you may regain HP equal to 1/4 of your maximum. Once this ability is used, you cannot use it again until the beginning of your next turn.",
         "desc": "Learn the Zeal Craft."
     },
     {
         "mote": "Isheilah",
         "name": "Last Minute Preparations",
         "details": "When you take the Preparing action, you gain three preparations instead of one.",
-        "desc": "Prepare 3 instead of 1."
+        "desc": "When you take the Preparing action, you gain three preparations instead of one."
       },
       {
         "mote": "Isheilah",
@@ -216,8 +216,8 @@
       {
         "mote": "Isheilah",
         "name": "Are You Sure About That?",
-        "details": "Gain the following Boost: [Jokes On You: You may spend 4 boost points when you take the Block or Roll reaction. If you do, redirect the attack to someone within one block of you. You must spend an additional two boost points to redirect an enemy into hitting themselves.]",
-        "desc": "4 BP: redirect attack to another within 1 block; +2 BP to make them hit themselves."
+        "details": "[4+X] When you take the Block or Roll reaction. If you do, redirect the strike to someone within one block of you. If X is greater than 1, you may redirect an enemy into hitting themselves.",
+        "desc": "[4+X] When you take the Block or Roll reaction. If you do, redirect the strike to someone within one block of you. If X is greater than 1, you may redirect an enemy into hitting themselves."
       },
       {
         "mote": "Isheilah",
@@ -240,8 +240,8 @@
       {
         "mote": "Isheilah",
         "name": "Spellslinger",
-        "details": "Gain the following boost: [Spellsling: When you use a normal reaction, instead of using that reaction you may spend 4 boost points and take a cast action.]",
-        "desc": "4 BP: trade reaction for cast action."
+        "details": "[Boost 4] When you use a normal reaction, instead of using that reaction you may take a cast action.",
+        "desc": "[Boost 4] When you use a normal reaction, instead of using that reaction you may take a cast action."
       },
       {
         "mote": "Isheilah",
@@ -252,8 +252,8 @@
       {
         "mote": "Isheilah",
         "name": "Make Slippery",
-        "details": "Gain the following boost: [Make Slip: When an enemy within 10 blocks begins moving for any reason, you may spend 2 boost points and make their movement end].",
-        "desc": "2 BP: stop enemy movement within 10."
+        "details": "[Boost 2] When an enemy within 10 blocks begins moving, you may make their movement end.",
+        "desc": "[Boost 2] When an enemy within 10 blocks begins moving, you may make their movement end."
       },
       {
         "mote": "Isheilah",
@@ -282,7 +282,7 @@
       {
         "mote": "Numo",
         "name": "Imbue Hallucination",
-        "details": "Gain the following Boost: [Make Remember: When you target an enemy with a major action, you may spend 1 boost point to inflict -(Spirit) to hit for their next turn. This does not stack with itself.]",
+        "details": "[Boost 1] When you target an enemy with a major action, you may inflict -(Spirit) to their strike rolls for their next turn. This does not stack with itself.",
         "desc": "1 BP: impose \u2013Spirit to hit on target next turn (no stacking)."
       },
       {
@@ -300,37 +300,37 @@
       {
         "mote": "Numo",
         "name": "Rewind",
-        "details": "Gain the following Boost: [Undo: After an action is taken you may spend 6 boost points. The effect from that action is undone and the action is lost.]",
-        "desc": "6 BP: undo the last action\u2019s effect."
+        "details": "[Boost 6] Undo: After an action is taken, the effect from that action is undone and the action is lost.",
+        "desc": "[Boost 6] Undo: After an action is taken, the effect from that action is undone and the action is lost."
       },
       {
         "mote": "Numo",
         "name": "Implant Thought",
-        "details": "Gain the following Boost: [Incept: When you take a minor action, you may spend 5 boost points and make an enemy take a major action that you control.]",
-        "desc": "5 BP: force enemy to take a major action you control."
+        "details": "[Boost 5] Before you take a minor action, make an enemy take a major action that you control.",
+        "desc": "[Boost 5] Before you take a minor action, make an enemy take a major action that you control."
       },
       {
         "mote": "Numo",
         "name": "Distract",
-        "details": "Gain the following Boost: [{C} Unthink: When you take a minor action, you may spend 2 boost points and target an enemy. That enemy cannot declare you as a target for any action until the end of their next turn.]",
-        "desc": "2 BP: one enemy cannot target you until end of their next turn."
+        "details": "[Boost 2] {C} Before you take a minor action, a target enemy cannot declare you as a target for any action until the end of their next turn.]",
+        "desc": "[Boost 2] {C} Before you take a minor action, a target enemy cannot declare you as a target for any action until the end of their next turn.]"
       },
       {
         "mote": "Numo",
         "name": "Visions",
         "details": "Gain +(Spirit) to hit all enemies that you can see.",
-        "desc": "+Spirit to hit all visible enemies."
+        "desc": "Gain +(Spirit) to hit all enemies that you can see."
       },
       {
         "mote": "Numo",
         "name": "Echo of the Past",
-        "details": "Gain the following Boost: [Replay: After casting a spell, you may spend 2 boost points and cast it again. You may only use this once per round.]",
-        "desc": "2 BP: recast last spell (once/round)."
+        "details": "[Boost 2] Once per round after casting a spell, you may cast it again.",
+        "desc": "[Boost 2] Once per round after casting a spell, you may cast it again."
       },
       {
         "mote": "Numo",
         "name": "Mind Read",
-        "details": "Gain the following Boost: [Read Mind: Once per action when you take a minor action, you may select a target within 10 blocks and spend 1 boost point. You learn their base character sheet and may deal Spirit/2 damage to them.]",
+        "details": "[Boost 1] Before you take a minor action, you may select a target within 10 blocks. You learn their base character sheet and may deal Spirit/2 damage to them.",
         "desc": "1 BP minor: view target\u2019s base sheet and deal Spirit/2 damage."
       },
       {
@@ -354,26 +354,26 @@
       {
         "mote": "Numo",
         "name": "Memory Craft",
-        "details": "Learn the following Enhancement: Once per combat, at the start of your turn regain a number of boost points equal to your Spirit. If the creator of this item is wielding it, instead regain all your boost points.",
+        "details": "Learn the following Enhancement: Once per combat, at the start of your turn regain a number of boost points equal to your Spirit. If you are the creator, instead regain all your boost points.",
         "desc": "Learn the Memory Craft."
       },
       {
         "mote": "Etill",
         "name": "Float Away",
-        "details": "Gain the following Boost: [Drift: When you are damaged, you may spend 1 boost point and take a movement action.]",
-        "desc": "1 BP: when damaged, take a move action."
+        "details": "[Boost 1] When you are damaged, you may take a movement action.",
+        "desc": "[Boost 1] When you are damaged, you may take a movement action."
       },
       {
         "mote": "Etill",
         "name": "Flowing Mind",
         "details": "Gain an additional amount of Max BP equal to your Agility and additional HP equal to double your Agility.",
-        "desc": "+Max BP = AGI; +HP = 2\u00d7AGI."
+        "desc": "Gain an additional amount of Max BP equal to your Agility and additional HP equal to double your Agility."
       },
       {
         "mote": "Etill",
         "name": "Ease of Mind",
         "details": "Gain +3 Spirit and gain a free preparation at the start of each round.",
-        "desc": "+3 Spirit; free prep at start of each round."
+        "desc": "Gain +3 Spirit and gain a free preparation at the start of each round."
       },
       {
         "mote": "Etill",
@@ -391,25 +391,25 @@
         "mote": "Etill",
         "name": "Half Here",
         "details": "Halve damage from attacks that glanced against you.",
-        "desc": "Glancing hits deal half damage to you."
+        "desc": "Halve damage from attacks that glanced against you."
       },
       {
         "mote": "Etill",
         "name": "Drown",
-        "details": "Gain the following Boost: [Drown: When you do damage to an enemy, you may spend 3 boost points and do an additional amount of damage equal to your Spirit.]",
-        "desc": "3 BP: add Spirit damage on a hit."
+        "details": "[Boost 3] Drown: When you do damage to an enemy, do an additional amount of damage equal to your Spirit.",
+        "desc": "[Boost 3] Drown: When you do damage to an enemy, do an additional amount of damage equal to your Spirit."
       },
       {
         "mote": "Etill",
         "name": "Rushing Torrent",
-        "details": "Gain the following Boost: [Rush: After ending a movement action next to an enemy, you may spend 5 boost points and take a major action once per enemy per round.]",
+        "details": "[Boost 5] After ending a movement action next to an enemy, you may take a major action once per enemy per round.",
         "desc": "5 BP: end movement adjacent \u2192 gain major action (once per enemy/round)."
       },
       {
         "mote": "Etill",
         "name": "Riptide",
-        "details": "Gain the following Boost: [Pull Under: After resolving the effects of a major action you made targeting an enemy, you may spend 3 boost points and reduce their Agility by your Spirit until the end of their next turn.]",
-        "desc": "3 BP: after a major vs enemy, reduce their AGI by your Spirit."
+        "details": "[Boost 3] After taking a major action targeting an enemy, reduce their Agility by your Spirit until the end of their next turn.",
+        "desc": "[Boost 3] After taking a major action targeting an enemy, reduce their Agility by your Spirit until the end of their next turn."
       },
       {
         "mote": "Etill",
@@ -421,7 +421,7 @@
         "mote": "Etill",
         "name": "Size of the Ocean",
         "details": "Gain an additional amount of HP equal to quadruple your Agility.",
-        "desc": "Bonus Max HP = 4\u00d7AGI."
+        "desc": "Gain an additional amount of HP equal to quadruple your Agility."
       },
       {
         "mote": "Etill",
@@ -432,31 +432,31 @@
       {
         "mote": "Etill",
         "name": "Flow Craft",
-        "details": "Learn the following Enhancement: You may substitute 2 minor actions for a major action, and vice versa. You may also substitute 2 movement actions for a minor action, or 1 minor action for a movement action. This substitution may be done before or after any of your actions. If the creator of this item is wielding it, gain a movement action.",
+        "details": "You may exchange 2 minor actions for a major action, and vice versa. You may also substitute 2 movement actions for a minor action, or 1 minor action for a movement action. This substitution may be done before or after any of your actions. If you are the creator, you gain a movement action at the start of each of your turns.",
         "desc": "Learn the Flow Craft."
       },
       {
         "mote": "Ursa",
         "name": "Oblivious",
-        "details": "Gain the following Boost: [Ignore: At the beginning of your turn you may spend 2 boost points. Enemies may not declare reactions or boosts in response to your actions until the end of your turn. Reactions and Boosts cannot be declared against this boost.]",
+        "details": "[Boost 2] At the beginning of your turn, enemies may not declare reactions or boosts in response to your actions until the end of your turn. Reactions and Boosts cannot be declared against this boost.",
         "desc": "2 BP at start of turn: enemies cannot react/boost against you this turn."
       },
       {
         "mote": "Ursa",
         "name": "Living in the Back of the Brain",
         "details": "Gain +3 Spirit and you may reduce damage from Cast actions by 5.",
-        "desc": "+3 Spirit; \u20135 damage from cast actions."
+        "desc": "Gain +3 Spirit and you may reduce damage from Cast actions by 5."
       },
       {
         "mote": "Ursa",
         "name": "Don\u2019t Care",
         "details": "Gain +4 Damage Resistance and you may reduce damage from sources which do not target you by 5.",
-        "desc": "+4 DR; \u20135 damage from non-targeted sources."
+        "desc": "Gain +4 Damage Resistance and you may reduce damage from sources which do not target you by 5."
       },
       {
         "mote": "Ursa",
         "name": "Nightmare Nightmare Nightmare",
-        "details": "Gain the following Boost: [{C} Shadows Everywhere: When you take a minor action you may spend X boost points and target an enemy. The enemy gets -X to hit for the remainder of combat.]",
+        "details": "[Boost X] {C} Before you take a minor action,  target an enemy. The enemy gains -X to hit with strikes.",
         "desc": "X BP minor: target gets \u2013X to hit for entire combat."
       },
       {
@@ -468,20 +468,20 @@
       {
         "mote": "Ursa",
         "name": "Acute Fascination",
-        "details": "Gain the following Boost: [{C} Hyperfixation: You may spend 2 boost points at the end of your turn and select an enemy. Once per turn, when you would glance against that enemy, you hit instead. If you crit, you may add your Strength to the damage roll. You may only fixate on one enemy this way at a time.]",
+        "details": "[Boost 2] {C} At the end of your turn, select an enemy. Once per turn, when you would glance against that enemy with a strike, you hit instead. If you land a critical hit against that enemy, you may add your Strength to the damage roll. You may only fixate on one enemy this way at a time.",
         "desc": "2 BP end of turn: fixate on an enemy; glances hit, crits add STR."
       },
       {
         "mote": "Ursa",
         "name": "Sudden Sleep",
-        "details": "Gain the following Boost: [Sleep: As a major action, you may spend 6 boost points and have your mana and HP restored to their maximum values. This ends your turn.]",
-        "desc": "6 BP major: fully restore HP and Mana; end turn."
+        "details": " [Boost 6] As a major action, your mana and HP are restored to their maximum values. This ends your turn.",
+        "desc": " [Boost 6] As a major action, your mana and HP are restored to their maximum values. This ends your turn."
       },
       {
         "mote": "Ursa",
         "name": "Devour Dream",
         "details": "When you hit an enemy, regain BP equal to the amount of BP they are missing.",
-        "desc": "On hit, regain BP equal to target's missing BP."
+        "desc": "When you hit an enemy, regain BP equal to the amount of BP they are missing."
       },
       {
         "mote": "Ursa",
@@ -492,13 +492,13 @@
       {
         "mote": "Ursa",
         "name": "Restful Sleep",
-        "details": "Gain the following Boost: [Give Rest: As a minor action, you may spend 5 boost points. Allies within 10 blocks heal an amount equal to your Spirit.]",
-        "desc": "5 BP minor: allies within 10 heal Spirit HP."
+        "details": " [Boost 5] As a minor action, allies within 10 blocks heal an amount equal to your Spirit.",
+        "desc": " [Boost 5] As a minor action, allies within 10 blocks heal an amount equal to your Spirit."
       },
       {
         "mote": "Ursa",
         "name": "Dream of Time Gone By",
-        "details": "Gain the following Boosts: [{C} Set: At the start of your turn you may spend 4 boost points. Mark your current HP, Mana and position. This your \u201cSet State.\u201d]\n[Dream: At the start of your turn you may spend 4 boost points. Return to your \u201cSet State and you no longer have your Set State.\u201d]",
+        "details": "Gain 2 powers: \n[Boost 4] {C} At the start of your turn, mark your current HP, Mana and position. This is your “Set State.”\n [Boost 4] At the start of your turn, return to your “Set State and you no longer have a Set State.”\n You may not use both powers in the same turn.",
         "desc": "4 BP: set a checkpoint (HP, Mana, position); 4 BP later to return to it."
       },
       {
@@ -510,14 +510,14 @@
       {
         "mote": "Ursa",
         "name": "Dream Craft",
-        "details": "Learn the following Enhancement: Gain 10 boost points. If the creator of this item is wielding it, instead of gaining boost points, gain 5 spirit.",
-        "desc": "Learn the Dream Craft."
+        "details": "Learn the following Enhancement: Gain 10 boost points. If you are the creator, gain 5 Spirit instead.",
+        "desc": "Learn the following Enhancement: Gain 10 boost points. If you are the creator, gain 5 Spirit instead."
       },
       {
         "mote": "Lichor",
         "name": "Black Blood",
-        "details": "Gain the following Boost: [Hostile Blood: When you take damage from an enemy within melee range, you may spend 3 boost points and deal an amount of damage equal to Grit to that enemy.]",
-        "desc": "3 BP: when damaged in melee, deal Grit damage back."
+        "details": "[Boost 3] After you take damage from an enemy within melee range, deal an amount of damage equal to Grit to that enemy.",
+        "desc": "[Boost 3] After you take damage from an enemy within melee range, deal an amount of damage equal to Grit to that enemy."
       },
       {
         "mote": "Lichor",
@@ -529,7 +529,7 @@
         "mote": "Lichor",
         "name": "Hardened Blood",
         "details": "Gain +4 Damage Resistance and increase damage you deal from attacks you hit with by half your Damage Resistance.",
-        "desc": "+4 DR; deal +\u00bd DR damage on hits."
+        "desc": "Gain +4 Damage Resistance and increase damage you deal from attacks you hit with by half your Damage Resistance."
       },
       {
         "mote": "Lichor",
@@ -540,43 +540,43 @@
       {
         "mote": "Lichor",
         "name": "Blood Weapon",
-        "details": "Gain the following Boost: [Blood Burst: You may spend 2 boost points during any die roll you make and replace any stat with grit for that roll.]",
-        "desc": "2 BP: replace any stat with Grit for a roll."
+        "details": "[Boost 2] Replace any one stat with Grit for a die roll.",
+        "desc": "[Boost 2] Replace any one stat with Grit for a die roll."
       },
       {
         "mote": "Lichor",
         "name": "The Number of Blood",
-        "details": "Gain the following Boost: [Angel Number: Spend 5 boost points when doing damage with an attack that hit. Do 5d6 extra damage. If the enemy is reduced to 0 HP, regain 5 boost points and 5d6 health.]",
+        "details": "[Boost 5] When doing damage with a strike that hit, do 5d6 extra damage. If the enemy is reduced to 0 HP by the strike, regain 5 boost points and 5d6 health.",
         "desc": "5 BP: +5d6 damage; if kill, regain 5 BP and 5d6 HP."
       },
       {
         "mote": "Lichor",
         "name": "Hemorrhage",
-        "details": "Gain the following boost: [{C} Make Bleed: Spend 2 boost points when you hit, the target suffers (Your Grit) damage at the start of the turn for the rest of combat. This does not stack with itself.]",
+        "details": "[Boost 2] {C} When you hit with a strike, the target suffers (Your Grit) damage at the start of their turn for the rest of combat. This does not stack with itself.",
         "desc": "2 BP: inflict bleed = Grit each turn (non-stacking)."
       },
       {
         "mote": "Lichor",
         "name": "Stop Bleeding",
         "details": "When given a cleansable effect, you may decide to not be given it instead.",
-        "desc": "Can refuse cleansable effects."
+        "desc": "When given a cleansable effect, you may decide to not be given it instead."
       },
       {
         "mote": "Lichor",
         "name": "Made of Liquid",
         "details": "Gain Grit max BP and 2x Grit HP.",
-        "desc": "Extra Max BP = Grit; extra HP = 2\u00d7Grit."
+        "desc": "Gain Grit max BP and 2x Grit HP."
       },
       {
         "mote": "Lichor",
         "name": "Blast of Blood",
         "details": "Gain the following Minor action: Explode: Deal damage equal to your Grit/2 to all enemies within 4 blocks.",
-        "desc": "Minor: deal Grit/2 damage to all within 4."
+        "desc": "Gain the following Minor action: Explode: Deal damage equal to your Grit/2 to all enemies within 4 blocks."
       },
       {
         "mote": "Lichor",
         "name": "Absorb Blood",
-        "details": "Gain the following Boost: [Absorb: At the start of your turn, spend 6 boost points. Regain HP equal to 1/4 of the damage you deal to enemies during your turn at the end of your turn.]",
+        "details": "[Boost 6] At the start of your turn, begin logging how much damage you do to enemies this turn. At the end of your turn, regain HP equal to 1/4 of the damage dealt.",
         "desc": "6 BP at start: heal 25% of damage dealt this turn."
       },
       {
@@ -588,13 +588,13 @@
       {
         "mote": "Lichor",
         "name": "Blood Craft",
-        "details": "Learn the following Enhancement: As a minor action, heal equal to twice your DR. If the creator of this item is wielding it, instead heal 4 times your DR.",
+        "details": "Learn the following Enhancement: As a minor action, heal equal to twice your DR. If you are the creator, instead heal 4 times your DR.",
         "desc": "Learn the Blood Craft."
       },
       {
         "mote": "Dawel",
         "name": "Step Through Shadows",
-        "details": "Gain the following Boost: [Shadow Step: At the beginning of your turn you may spend 1 boost point and appear anywhere that enemies cannot see within the combat zone, or spend 4 boost points and appear anywhere.]",
+        "details": "[Boost 1+X] At the beginning of your turn you may appear anywhere that enemies cannot see within the combat zone. If X is 3 or higher, you may appear anywhere.",
         "desc": "1 BP: teleport to unseen spot; 4 BP: teleport anywhere."
       },
       {
@@ -606,44 +606,44 @@
       {
         "mote": "Dawel",
         "name": "Unspeak",
-        "details": "Gain the following Boost: [Unspeak: You may spend X boost points when an enemy declares a boost where they spend X boost points. The boost does not happen and the resources are not spent. They \u201cregain\u201d the BP after Unspeak resolves. This BP regain cannot be stopped. After a boost fully resolves, it cannot be unspoken.]",
+        "details": "[Boost N] When an enemy declares a boost where they spent N boost points, negate the boost. Resources are not spent, but they may not declare the same boost on this trigger again. After a boost fully resolves, it cannot be unspoken.",
         "desc": "X BP: cancel an enemy boost as declared (they regain BP)."
       },
       {
         "mote": "Dawel",
         "name": "Silent Strike",
-        "details": "When you crit, do an additional amount of damage equal to double one of your damage attributes for that attack.",
+        "details": "When you land a critical hit with a strike, do an additional amount of damage equal to double one of your damage attributes for that strike.",
         "desc": "On crit, deal +2\u00d7 one damage attribute."
       },
       {
         "mote": "Dawel",
         "name": "Unheard, Unseen",
-        "details": "Gain the following Boost: [Block With Darkness: When an enemy hits you with an attack, you may spend 2 boost points to make them glance].",
-        "desc": "2 BP: turn a hit into a glance."
+        "details": "[Boost 2] When an enemy hits you with a strike, they glance.",
+        "desc": "[Boost 2] When an enemy hits you with a strike, they glance."
       },
       {
         "mote": "Dawel",
         "name": "Shut Them Up",
-        "details": "Gain the following Boost: [Silence: When you target an enemy with a cast action, you may spend 2 boost points. The target may not take any boosts until the end of your next turn.]",
-        "desc": "2 BP: silence target (no boosts until your next turn)."
+        "details": "[Boost 2] When you target an enemy with a cast action, they may not take any boosts until the end of your next turn.",
+        "desc": "[Boost 2] When you target an enemy with a cast action, they may not take any boosts until the end of your next turn."
       },
       {
         "mote": "Dawel",
         "name": "Reverse Entropy",
         "details": "Enemies within 3 blocks of you cannot increase their attributes or calculated attributes.",
-        "desc": "Enemies within 3 cannot increase stats or calculated attributes."
+        "desc": "Enemies within 3 blocks of you cannot increase their attributes or calculated attributes."
       },
       {
         "mote": "Dawel",
         "name": "Noise Void",
-        "details": "Gain the following Boost: [{C} Create Void: At the start of your turn you may spend X boost points. Enemies within 8 blocks of you must spend X additional BP to boost until the start of your next turn.]",
+        "details": "[Boost X]{C} Enemies within 8 blocks of you must spend X additional boost points to boost until the start of your next turn.",
         "desc": "X BP start of turn: enemies within 8 pay +X BP for boosts."
       },
       {
         "mote": "Dawel",
         "name": "Shadow in the Dark",
         "details": "Enemies cannot declare reactions on your turn.",
-        "desc": "Enemies cannot react during your turn."
+        "desc": "Enemies cannot declare reactions on your turn."
       },
       {
         "mote": "Dawel",
@@ -654,8 +654,8 @@
       {
         "mote": "Dawel",
         "name": "Not There",
-        "details": "Gain the following Boost: [Be-Not: When you are affected by an ability, casts, boost, reaction or attack which did not target you, you may spend 2 boost points to be unaffected. This cannot be used against effects caused by abilities, casts, boosts, reactions and attacks which did target you].",
-        "desc": "2 BP: ignore non-targeted effects."
+        "details": "[Boost 2] When you are affected by an ability, casts, boost, reaction or attack which did not target you, you are unaffected. This cannot be used against effects caused by abilities, casts, boosts, reactions and attacks which did target you.",
+        "desc": "[Boost 2] When you are affected by an ability, casts, boost, reaction or attack which did not target you, you are unaffected. This cannot be used against effects caused by abilities, casts, boosts, reactions and attacks which did target you."
       },
       {
         "mote": "Dawel",
@@ -666,7 +666,7 @@
       {
         "mote": "Dawel",
         "name": "Silence Craft",
-        "details": "Learn the following Enhancement: When someone glances against you, you regain 3 boost points. If the creator of this item is wielding it, when someone glances against you, you regain an additional 3 boost points.",
+        "details": "Learn the following Enhancement:  When someone glances against you, regain 3 boost points. If you are the creator, regain an additional 3 boost points when someone glances against you.",
         "desc": "Learn the Silence Craft."
       },
       {
@@ -679,24 +679,24 @@
         "mote": "Grisha",
         "name": "Death, Swift",
         "details": "Gain +3 Agility and you may take a movement action whenever you kill an enemy.",
-        "desc": "+3 AGI; free move on kill."
+        "desc": "Gain +3 Agility and you may take a movement action whenever you kill an enemy."
       },
       {
         "mote": "Grisha",
         "name": "Doom Desire",
         "details": "Gain +3 Spirit and you may attack an adjacent enemy when you are killed.",
-        "desc": "+3 Spirit; make attack on death."
+        "desc": "Gain +3 Spirit and you may attack an adjacent enemy when you are killed."
       },
       {
         "mote": "Grisha",
         "name": "Uncast",
         "details": "When an enemy spends mana, you cannot take damage for the rest of the turn.",
-        "desc": "If enemy spends mana, you are immune to damage that turn."
+        "desc": "When an enemy spends mana, you cannot take damage for the rest of the turn."
       },
       {
         "mote": "Grisha",
         "name": "Return Fire",
-        "details": "Gain the following Boost: [Hex Duel: After an enemy uses a cast action or spends boost points, you may spend 4 boost points and immediately cast a spell or make an attack targeting them.]",
+        "details": "[Boost 4] Hex Duel: After an enemy uses a cast action or spends boost points, immediately cast a spell or make a strike targeting them.",
         "desc": "4 BP: respond instantly with spell or attack when enemy casts/spends BP."
       },
       {
@@ -709,7 +709,7 @@
         "mote": "Grisha",
         "name": "Boundless Hunger",
         "details": "When you regain BP, you gain Max BP instead.",
-        "desc": "BP gained increases Max BP instead."
+        "desc": "When you regain BP, you gain Max BP instead."
       },
       {
         "mote": "Grisha",
@@ -720,20 +720,20 @@
       {
         "mote": "Grisha",
         "name": "Devour Metaphysical",
-        "details": "Gain the following Boost: [Devour: When you hit an enemy with an attack and deal damage, you may spend 4 boost points. You gain the knowledge of all of their boosts and abilities. You gain one of them for the rest of combat.]",
+        "details": "[Boost 4] When you hit an enemy with a strike and deal damage, you gain the knowledge of all of their boosts and abilities. You gain one of them for the rest of combat.",
         "desc": "4 BP: on hit, learn all enemy boosts/abilities; copy one for rest of combat."
       },
       {
         "mote": "Grisha",
         "name": "It Doesn't Come Back",
-        "details": "Gain the following Boost: [Kill Connection: When you hit an enemy with an attack and deal damage, you may spend 4 boost points. You gain the knowledge of all of their boosts and abilities. Select an ability or boost and they lose it for the rest of combat.]",
+        "details": "[Boost 4] When you hit an enemy with a strike and deal damage, you gain the knowledge of all of their boosts and abilities. Select an ability or boost and they lose it for the rest of combat.",
         "desc": "4 BP: on hit, steal an ability/boost from enemy; they lose it."
       },
       {
         "mote": "Grisha",
         "name": "Swallow",
         "details": "After using a boost from the Grisha mote as a part of an attack, or killing an enemy, regain Spi/2 HP.",
-        "desc": "After Grisha boost or kill, heal Spirit/2 HP."
+        "desc": "After using a boost from the Grisha mote as a part of an attack, or killing an enemy, regain Spi/2 HP."
       },
       {
         "mote": "Grisha",
@@ -744,26 +744,26 @@
       {
         "mote": "Grisha",
         "name": "Ruin Craft",
-        "details": "Learn the following Enhancement: When you hit enemies, you may ignore their DR. If the creator of this item is wielding it, when you hit someone you reduce their grit by 2 in addition.",
+        "details": "Learn the following Enhancement: When you hit enemies, you may ignore their DR. If you are the creator, you may reduce the target’s Grit by 2 when you hit with a strike.",
         "desc": "Learn the Ruin Craft."
       },
       {
         "mote": "Anavani",
         "name": "I Shine",
-        "details": "Gain the following Boost: [{C} Shine: At the start of your turn, you may spend X Boost Points. Until the start of your next turn, all enemies within X blocks have -X to hit].",
+        "details": "[Boost X]{C} At the start of your turn, all enemies within X blocks have -X to hit with strikes until the start of your next turn.",
         "desc": "X BP start: enemies within X blocks get \u2013X to hit until next turn."
       },
       {
         "mote": "Anavani",
         "name": "Commandment",
         "details": "Gain +3 Strength and when you hit an enemy with an attack, you may move them 1 block.",
-        "desc": "+3 STR; push enemy 1 block on hit."
+        "desc": "Gain +3 Strength and when you hit an enemy with an attack, you may move them 1 block."
       },
       {
         "mote": "Anavani",
         "name": "Not A Chance",
         "details": "Gain +3 Spirit and once per round when you would be moved by an enemy, you are not.",
-        "desc": "+3 Spirit; once/round ignore forced movement."
+        "desc": "Gain +3 Spirit and once per round when you would be moved by an enemy, you are not."
       },
       {
         "mote": "Anavani",
@@ -780,14 +780,14 @@
       {
         "mote": "Anavani",
         "name": "Star Power",
-        "details": "Gain the following Boost: [Burst of Speed: At the end of your turn, you may spend 1 boost point to gain a movement or minor action, and may spend 3 boost points to gain a major action. This can only be done once per round.]",
+        "details": "[Boost 1+X] At the end of your turn, gain a movement or minor action. If X is 2, gain a major action instead. This can only be done once per round.",
         "desc": "1 BP: +move/minor at end of turn; 3 BP: +major; once/round."
       },
       {
         "mote": "Anavani",
         "name": "Glow",
         "details": "As a minor action, you may regain (Spirit/2) boost points, rounding up.",
-        "desc": "Minor: regain Spirit/2 BP (rounded up)."
+        "desc": "As a minor action, you may regain (Spirit/2) boost points, rounding up."
       },
       {
         "mote": "Anavani",
@@ -798,19 +798,19 @@
       {
         "mote": "Anavani",
         "name": "Nova",
-        "details": "Gain the following Boost: [Nova: When you hit an enemy you may spend 4 boost points and do an additional amount of damage equal to Strength+Spirit]",
-        "desc": "4 BP on hit: deal +STR+SPI damage."
+        "details": "[Boost 4] When you hit an enemy with a strike, do an additional amount of damage equal to Strength+Spirit.",
+        "desc": "[Boost 4] When you hit an enemy with a strike, do an additional amount of damage equal to Strength+Spirit."
       },
       {
         "mote": "Anavani",
         "name": "Ascend",
         "details": "When you take a minor action, you may appear anywhere within 5 blocks of your current location.",
-        "desc": "Minor: teleport within 5 blocks."
+        "desc": "When you take a minor action, you may appear anywhere within 5 blocks of your current location."
       },
       {
         "mote": "Anavani",
         "name": "Too High",
-        "details": "Gain the following Boost: [Rise: When you are hit by a melee attack, spend 4 Boost Points to make it glance, and you may take a move action after the attack resolves which cannot be reacted to.]",
+        "details": "[Boost 4] When you are hit or glanced by a melee strike, it glances and you may take a move action after the strike resolves which cannot be reacted to.",
         "desc": "4 BP on melee hit: make it glance; free move after (unreactable)."
       },
       {
@@ -822,7 +822,7 @@
       {
         "mote": "Anavani",
         "name": "Ascendance Craft",
-        "details": "Learn the following Enhancement: Hostile creatures within 15 blocks move at 1/2 speed. If the creator of this item is wielding it, in addition to the above effect, enemies within 6 blocks reduce their Agility by half (rounding up, minimum of 1).",
+        "details": "Learn the following Enhancement: Hostile creatures within 15 blocks move at 1/2 speed. Effect: Hostile creatures within 15 blocks move at 1/2 speed. If you are the creator, enemies within 6 blocks also have their agility halved. This rounds up, and has no effect on creatures with Agility less than 2..",
         "desc": "Learn the Ascendance Craft."
       },
       {
@@ -846,20 +846,20 @@
       {
         "mote": "Kative",
         "name": "Bottle Spell",
-        "details": "Gain the following Boost: [Lightning in a Bottle: When you take the cast action with a spell, you may spend a number of boost points equal to (the spell\u2019s mana cost)/3. In addition to the effect of the spell, gain the spell as a potion that you can use whenever you would normally use a potion. The potion becomes permanently inert at the end of combat. You may use this potion even if you have already drank 2 potions in this combat.]",
+        "details": "[Boost N] After you take the cast action with a spell,  gain the spell as a potion that you can use whenever you would normally use a potion. You do not spend mana to consume this potion. The potion becomes permanently inert at the end of combat. You may use this potion even if you have already drank 2 potions in this combat. N is (the spell’s mana cost)/3.",
         "desc": "Spend (mana cost)/3 BP: store cast spell as potion usable later in combat."
       },
       {
         "mote": "Kative",
         "name": "Tinker",
-        "details": "Gain the following Boost: [{C} Let Me Sharpen That For You: When you move next to an ally or an ally moves next to you, you may spend 1 boost point and choose a weapon or natural attack of that ally. That attack or weapon deals 2 additional damage for the rest of combat.]",
+        "details": "[Boost 1] {C} Let Me Sharpen That For You: When you move next to an ally or an ally moves next to you, their strikes deal 2 additional damage for the rest of combat.",
         "desc": "1 BP when adjacent to ally: buff their weapon/attack +2 damage for combat."
       },
       {
         "mote": "Kative",
         "name": "Perfectionist",
         "details": "On crit, double the damage dice.",
-        "desc": "Crits roll double dice."
+        "desc": "On crit, double the damage dice."
       },
       {
         "mote": "Kative",
@@ -876,7 +876,7 @@
       {
         "mote": "Kative",
         "name": "Clay Army",
-        "details": "Create a level 1 character sheet with no motes or race called a \u201cGolem\u201d. Gain the following Boost: [Makeshift Golem: After taking a movement action, you may spend 2 boost points to spawn a \u201cGolem\u201d in adjacency. The golem acts during your turn. You may only have 4 such golems at once. If more than 4 would exist, select one to be destroyed. If you are removed from combat, they stop taking actions and become blocking terrain.]",
+        "details": "Create a level 1 character sheet with no motes or race called a \u201cGolem\u201d. [Boost 2] After taking a movement action, spawn a “Golem” in adjacency. The golem acts during your turn. You may only have 4 such golems at once. If more than 4 would exist, select one to be destroyed. If you are removed from combat, they stop taking actions and become blocking terrain.",
         "desc": "2 BP after moving: summon golem (max 4). They block if you\u2019re gone."
       },
       {
@@ -894,20 +894,20 @@
       {
         "mote": "Kative",
         "name": "Gizmos",
-        "details": "Gain the following Boost: [Throw Gizmo: At the start of your turn, you may spend X boost points and select an option from the following table with a \u2018Boost Points\u2019 characteristic of X or less.]\nBoost Points\nName\nOutcome\n1\nPortable Wall\nCreate a 1 block long by 4 blocks wide wall that cannot be seen through or moved over, with at least one block of that wall being within 8 blocks. This has 4xSpirit HP.\n2\nMurder Wall\nCreate a 1 block long by 4 blocks wide wall that can be seen through by allies only (they can also direct attacks through the wall), with at least one block of that wall being within 8 blocks. This has 3xSpirit HP.\n2\nBlast Rock\nDestroy an obstacle that was placed in this combat.\n2\nConfusion Gas\nSelect an unoccupied block within 8 blocks. It cannot be moved through and no one adjacent to that block can take the attack action.",
+        "details": "[Boost X] At the start of your turn, select an option from the following table with a ‘Boost Points’ characteristic of X or less. \nBoost Points\nName\nOutcome\n1\nPortable Wall\nCreate a 1 block long by 4 blocks wide wall that cannot be seen through or moved over, with at least one block of that wall being within 8 blocks. This has 4xSpirit HP.\n2\nMurder Wall\nCreate a 1 block long by 4 blocks wide wall that can be seen through by allies only (they can also direct attacks through the wall), with at least one block of that wall being within 8 blocks. This has 3xSpirit HP.\n2\nBlast Rock\nDestroy an obstacle that was placed in this combat.\n2\nConfusion Gas\nSelect an unoccupied block within 8 blocks. It cannot be moved through and no one adjacent to that block can take the attack action.",
         "desc": "Spend X BP: deploy a gizmo (wall, blast, or gas) depending on choice."
       },
       {
         "mote": "Kative",
         "name": "Artifice Craft",
-        "details": "Learn the following Enhancement: When creating this item, you may add any other Mote Craft enhancement to this item, without the text which empowers the creator of the item. If the creator of this item is wielding it, you may add a second Mote Craft enhancement in the same way as the first without counting against maximum enhancements on this item or taking an additional downtime.",
+        "details": "Learn the following Enhancement: When creating this item, you may add any other Mote Craft enhancement to this item, without the text which empowers the creator of the item. If you are the creator,  you may add a second Mote Craft enhancement in the same way as the first without counting against maximum enhancements on the item or taking additional downtime.",
         "desc": "Learn the Artifice Craft."
       },
       {
         "mote": "Morae",
         "name": "Turning The Wheel",
-        "details": "Gain the following Boost: [Sever the Thread: Spend 4 boost points when an enemy declares an attack against you. The attack is nullified.]",
-        "desc": "4 BP: cancel an attack against you."
+        "details": "[Boost 4] Sever the Thread: When an enemy declares a strike against you. The strike is nullified.",
+        "desc": "[Boost 4] Sever the Thread: When an enemy declares a strike against you. The strike is nullified."
       },
       {
         "mote": "Morae",
@@ -919,30 +919,30 @@
         "mote": "Morae",
         "name": "All Seeing Eyes",
         "details": "Gain +3 Spirit and at the start of your turn select one enemy, you know how much HP it has.",
-        "desc": "+3 Spirit; know an enemy\u2019s HP each turn."
+        "desc": "Gain +3 Spirit and at the start of your turn select one enemy, you know how much HP it has."
       },
       {
         "mote": "Morae",
         "name": "Doomed From The Start",
         "details": "Gain +4 Damage Resistance and whenever you take damage which ignores Damage Resistance, gain 1 BP.",
-        "desc": "+4 DR; when ignoring DR damage is taken, gain 1 BP."
+        "desc": "Gain +4 Damage Resistance and whenever you take damage which ignores Damage Resistance, gain 1 BP."
       },
       {
         "mote": "Morae",
         "name": "A Lone Lamb",
-        "details": "Gain the following Boost: [{C} Sacrifice: When you take a minor action, you may spend X boost points to enrage any enemy or number of enemies in an X block radius. They take X damage when they attack anyone but you until you are at 0 HP for the rest of the combat.]",
+        "details": "[Boost X]{C} Before you take a minor action, enrage any enemy or number of enemies in an X block radius. They take X damage when they strike anyone but you until you die.",
         "desc": "X BP minor: enemies in radius take X damage if attacking others (until you drop)."
       },
       {
         "mote": "Morae",
         "name": "Martyr",
         "details": "When you cast a spell, you may spend HP instead of mana at a rate of 2 HP to 1 mana.",
-        "desc": "Cast spells with HP (2 HP = 1 mana)."
+        "desc": "When you cast a spell, you may spend HP instead of mana at a rate of 2 HP to 1 mana."
       },
       {
         "mote": "Morae",
         "name": "Avenged",
-        "details": "Gain the following Boost: [{C} Mark for Death: When you take damage, you may spend 2 boost points. The source of that damage takes an additional amount of damage equal to your Spirit whenever they are targeted by you or your allies with attacks for the rest of combat.]",
+        "details": "[Boost 2]{C} After you take damage, the source of that damage takes an additional amount of damage equal to your Spirit whenever they are targeted by you or your allies with strikes for the rest of combat.",
         "desc": "2 BP: mark damage source; they take +Spirit damage whenever attacked."
       },
       {
@@ -960,14 +960,14 @@
       {
         "mote": "Morae",
         "name": "Bonded by Unseen Threads",
-        "details": "Gain the following Boost: [{C} Link: When you target an enemy with an attack or cast action, you may spend 3 boost points. The target is \u2018linked.\u2019 Every time you take damage, all creatures \u2018linked\u2019 by you take 1/2 of that damage as well.]",
+        "details": "[Boost 3]{C} Link: When you target an enemy with an attack or cast action, the target is ‘linked.’ Every time you take damage, all creatures ‘linked’ by you take 1/2 of that damage as well.",
         "desc": "3 BP: link enemy; they take \u00bd of damage you take."
       },
       {
         "mote": "Morae",
         "name": "Sever Fate",
         "details": "On Crit, reduce enemy Max BP and BP by your Strength.",
-        "desc": "On crit: enemy loses STR BP/Max BP."
+        "desc": "On Crit, reduce enemy Max BP and BP by your Strength."
       },
       {
         "mote": "Morae",
@@ -978,7 +978,7 @@
       {
         "mote": "Morae",
         "name": "Fate Craft",
-        "details": "Learn the following Enhancement: If you would hit with an attack, you instead crit. If the creator of this item is wielding it, then if they would glance, they instead hit once per round.",
+        "details": "Learn the following Enhancement: If you would hit with an attack, you instead crit. If you are the creator, then once per round when you glance with a strike you can choose to hit instead.",
         "desc": "Learn the Fate Craft."
       }
 
