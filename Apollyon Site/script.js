@@ -1792,10 +1792,12 @@
   }
 
   /**
-   * Helper to check if a value should be included in export (not empty or zero)
+   * Helper to check if a value should be included in export (not empty, but allow 0)
    */
   function shouldInclude(value) {
-    return value !== "" && value !== "0" && value !== 0;
+    // Only exclude empty strings, null, or undefined
+    // Allow 0 and "0" as valid values to export
+    return value !== "" && value !== null && value !== undefined;
   }
 
   /**
@@ -1947,17 +1949,17 @@
    */
   function fromCompactFormat(compact) {
     const data = {
-      name: compact.n || "",
-      level: compact.l || "",
-      exp: compact.e || "",
-      race: compact.r || "",
+      name: safeValue(compact.n),
+      level: safeValue(compact.l),
+      exp: safeValue(compact.e),
+      race: safeValue(compact.r),
       core: [],
       calc: [],
       inventory: [],
       motes: [],
       enhancements: [],
       masteries: [],
-      masteryValue: compact.v || "",
+      masteryValue: safeValue(compact.v),
       triggers: [],
       mindAlterations: [],
       mindBreaks: []
@@ -1966,28 +1968,28 @@
     // Core attributes
     if (compact.c && Array.isArray(compact.c)) {
       data.core = compact.c.map(attr => ({
-        base: attr.b || "",
-        mod: attr.m || "",
-        temp: attr.t || "",
-        level: attr.l || "",
-        total: attr.o || ""
+        base: safeValue(attr.b),
+        mod: safeValue(attr.m),
+        temp: safeValue(attr.t),
+        level: safeValue(attr.l),
+        total: safeValue(attr.o)
       }));
     }
     
     // Calculated attributes
     if (compact.k && Array.isArray(compact.k)) {
       data.calc = compact.k.map(attr => ({
-        base: attr.b || "",
-        mod: attr.m || "",
-        temp: attr.t || "",
-        attrCount: attr.c || "0",
+        base: safeValue(attr.b),
+        mod: safeValue(attr.m),
+        temp: safeValue(attr.t),
+        attrCount: safeValue(attr.c, "0"),
         attrMultipliers: (attr.a && Array.isArray(attr.a)) ? attr.a.map(am => ({
-          attr: am.a || "",
-          mult: am.m || ""
+          attr: safeValue(am.a),
+          mult: safeValue(am.m)
         })) : [],
-        mult: attr.u || "",
-        end: attr.e || "",
-        extra: attr.x || ""
+        mult: safeValue(attr.u),
+        end: safeValue(attr.e),
+        extra: safeValue(attr.x)
       }));
     }
     
@@ -2084,6 +2086,17 @@
     // If it has 'n' for name but not 'name', it's compact
     return (data.n !== undefined || data.c !== undefined || data.k !== undefined) && 
            (data.name === undefined && data.core === undefined && data.calc === undefined);
+  }
+
+  /**
+   * Helper to safely get a value, preserving "0" and 0 but defaulting empty/null/undefined to ""
+   */
+  function safeValue(value, defaultValue = "") {
+    if (value === null || value === undefined || value === "") {
+      return defaultValue;
+    }
+    // Preserve both string "0" and number 0
+    return String(value);
   }
 
   /** Export character data as a simple string format */
@@ -2454,10 +2467,10 @@
       await new Promise(resolve => setTimeout(resolve, 50));
       
       // Import basic info
-      document.getElementById("charName").value = data.name || "";
-      document.getElementById("level").value = data.level || "";
-      document.getElementById("exp").value = data.exp || "";
-      document.getElementById("race").value = data.race || "";
+      document.getElementById("charName").value = safeValue(data.name);
+      document.getElementById("level").value = safeValue(data.level);
+      document.getElementById("exp").value = safeValue(data.exp);
+      document.getElementById("race").value = safeValue(data.race);
 
       // Import core attributes
       if (data.core) {
@@ -2466,11 +2479,11 @@
           if (coreRows[i]) {
             const inputs = coreRows[i].querySelectorAll('input');
             if (inputs.length >= 5) {
-              inputs[0].value = attr.base || "";
-              inputs[1].value = attr.mod || "";
-              inputs[2].value = attr.temp || "";
-              inputs[3].value = attr.level || "";
-              inputs[4].value = attr.total || "";
+              inputs[0].value = safeValue(attr.base);
+              inputs[1].value = safeValue(attr.mod);
+              inputs[2].value = safeValue(attr.temp);
+              inputs[3].value = safeValue(attr.level);
+              inputs[4].value = safeValue(attr.total);
             }
           }
         });
@@ -2484,23 +2497,23 @@
           if (calcRows[rowIndex]) {
             const inputs = calcRows[rowIndex].querySelectorAll('input');
             if (inputs.length >= 6) {
-              inputs[0].value = attr.base || "";
-              inputs[1].value = attr.mod || "";
-              inputs[2].value = attr.temp || "";
-              inputs[3].value = attr.attrCount || "0"; // Attribute count
-              inputs[4].value = attr.mult || "";
-              inputs[5].value = attr.end || "";
+              inputs[0].value = safeValue(attr.base);
+              inputs[1].value = safeValue(attr.mod);
+              inputs[2].value = safeValue(attr.temp);
+              inputs[3].value = safeValue(attr.attrCount, "0"); // Attribute count defaults to "0"
+              inputs[4].value = safeValue(attr.mult);
+              inputs[5].value = safeValue(attr.end);
             }
             const extraInput = calcRows[rowIndex].querySelector('td:nth-last-child(2) input');
             if (extraInput) {
-              extraInput.value = attr.extra || "";
+              extraInput.value = safeValue(attr.extra);
             }
             
             // Import attribute multipliers
             if (attr.attrMultipliers && attr.attrMultipliers.length > 0) {
               // Trigger the updateAttrMultipliers function by setting the count
               const attrCountInput = inputs[3];
-              attrCountInput.value = attr.attrCount || "0";
+              attrCountInput.value = safeValue(attr.attrCount, "0");
               attrCountInput.dispatchEvent(new Event('input'));
               
               // Wait a moment for the UI to update, then populate the multipliers
@@ -2514,8 +2527,8 @@
                       if (multiplierGroups[multIndex]) {
                         const attrSelect = multiplierGroups[multIndex].querySelector('select');
                         const multInput = multiplierGroups[multIndex].querySelector('input[type="number"]');
-                        if (attrSelect) attrSelect.value = attrMult.attr || "";
-                        if (multInput) multInput.value = attrMult.mult || "";
+                        if (attrSelect) attrSelect.value = safeValue(attrMult.attr);
+                        if (multInput) multInput.value = safeValue(attrMult.mult);
                       }
                     });
                   }
@@ -2642,7 +2655,7 @@
 
       // Import mastery value
       if (data.masteryValue !== undefined) {
-        document.getElementById("masteryValue").value = data.masteryValue || "";
+        document.getElementById("masteryValue").value = safeValue(data.masteryValue);
       }
 
       // Import triggers
