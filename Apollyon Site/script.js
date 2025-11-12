@@ -150,8 +150,8 @@
     {
         "mote": "Pelian",
         "name": "You Have No Right",
-        "details": "[Boost 1] When an enemy would damage you, double your DR for the rest of the turn.",
-        "desc": "[Boost 1] When an enemy would damage you, double your DR for the rest of the turn."
+        "details": "[Boost 2] Once per turn when an enemy would damage you, double your DR for the rest of the turn.",
+        "desc": "[Boost 2] Once per turn when an enemy would damage you, double your DR for the rest of the turn."
     },
     {
         "mote": "Pelian",
@@ -282,14 +282,14 @@
       {
         "mote": "Numo",
         "name": "Imbue Hallucination",
-        "details": "[Boost 1] When you target an enemy with a major action, you may inflict -(Spirit) to their strike rolls for their next turn. This does not stack with itself.",
-        "desc": "1 BP: impose \u2013Spirit to hit on target next turn (no stacking)."
+        "details": "When you use a boost, you gain a Hallucination. If an enemy would target you, you may expend X hallucinations and they must target someone else or the targeting is negated unless they spend 2X BP.",
+        "desc": "Boost to get hallucinations. Spend them to make enemies pay BP when they target you."
       },
       {
         "mote": "Numo",
         "name": "Trapped Thought Process",
-        "details": "Gain the following cast action:{C} Select an action (such as \u201cAttack\u201d) and an enemy. That enemy takes an amount of damage equal to your spirit every time they take that action until the end of combat.",
-        "desc": "Cast: tag enemy+action; they take Spirit damage whenever they use it (until combat ends)."
+        "details": "After taking a cast action, Select an action (such as \u201cAttack\u201d) and an enemy. {C} That enemy takes an amount of damage equal to your spirit every time they take that action until the end of combat.",
+        "desc": "On Cast: tag enemy+action; they take Spirit damage whenever they use it (until combat ends)."
       },
       {
         "mote": "Numo",
@@ -299,15 +299,15 @@
       },
       {
         "mote": "Numo",
-        "name": "Rewind",
-        "details": "[Boost 6] Undo: After an action is taken, the effect from that action is undone and the action is lost.",
-        "desc": "[Boost 6] Undo: After an action is taken, the effect from that action is undone and the action is lost."
+        "name": "Remember",
+        "details": "[Boost 2] After a boost is used. That boost is now your 'Remembered Boost' and you can use it as if you have it. You may only have one 'Remembered Boost' at a time.",
+        "desc": "[Boost 2] Remember a boost."
       },
       {
         "mote": "Numo",
         "name": "Implant Thought",
-        "details": "[Boost 5] Before you take a minor action, make an enemy take a major action that you control.",
-        "desc": "[Boost 5] Before you take a minor action, make an enemy take a major action that you control."
+        "details": "[Boost 5] At the start of your turn, make an enemy take a major action that you control.",
+        "desc": "[Boost 5] At the start of your turn, make an enemy take a major action that you control."
       },
       {
         "mote": "Numo",
@@ -378,8 +378,8 @@
       {
         "mote": "Etill",
         "name": "Phase Through",
-        "details": "You may move through enemies and obstacles as though they are not there, and enemies cannot react or boost in response to your movement.",
-        "desc": "Move through enemies/obstacles; immune to reactions/boosts from movement."
+        "details": "You may move through enemies and obstacles as though they are not there, and enemies cannot react or boost in response to your movement. {C} Once per turn when you move through an enemy, they lose Spirit/2 Agility.",
+        "desc": "Move through enemies/obstacles; immune to reactions/boosts from movement. Take away Spi/2 of enemy Agi when you move through them."
       },
       {
         "mote": "Etill",
@@ -455,9 +455,9 @@
       },
       {
         "mote": "Ursa",
-        "name": "Nightmare Nightmare Nightmare",
-        "details": "[Boost X] {C} Before you take a minor action,  target an enemy. The enemy gains -X to hit with strikes.",
-        "desc": "X BP minor: target gets \u2013X to hit for entire combat."
+        "name": "Waking Nightmare",
+        "details": "You have 2 nightmares. When you end your turn and did not boost on that turn, you gain a nightmare. When you take damage from an enemy, you may spend a nightmare and instead take no damage.",
+        "desc": "Gain a nightmare by not boosting on your turn, spend a nightmare to reduce damage to 0."
       },
       {
         "mote": "Ursa",
@@ -479,9 +479,9 @@
       },
       {
         "mote": "Ursa",
-        "name": "Devour Dream",
-        "details": "When you hit an enemy, regain BP equal to the amount of BP they are missing.",
-        "desc": "When you hit an enemy, regain BP equal to the amount of BP they are missing."
+        "name": "Comatose",
+        "details": "Once per combat when you would die, you instead have Max HP and may lose all your BP. This cannot be negated. You cannot boost until you next take damage.",
+        "desc": "On die: Regain max HP and no boosting until you take damage."
       },
       {
         "mote": "Ursa",
@@ -569,9 +569,9 @@
       },
       {
         "mote": "Lichor",
-        "name": "Blast of Blood",
-        "details": "Gain the following Minor action: Explode: Deal damage equal to your Grit/2 to all enemies within 4 blocks.",
-        "desc": "Gain the following Minor action: Explode: Deal damage equal to your Grit/2 to all enemies within 4 blocks."
+        "name": "Overflowing",
+        "details": "You begin combat with 5 Blood. When you would reach 0 HP from enemy damage, you may instead spend a Blood to stay at 1 HP.",
+        "desc": "Start with 5 blood. You can spend 1 to avoid dying."
       },
       {
         "mote": "Lichor",
@@ -732,8 +732,8 @@
       {
         "mote": "Grisha",
         "name": "Swallow",
-        "details": "After using a boost from the Grisha mote as a part of an attack, or killing an enemy, regain Spi/2 HP.",
-        "desc": "After using a boost from the Grisha mote as a part of an attack, or killing an enemy, regain Spi/2 HP."
+        "details": "Your size is 1. Every time an enemy boosts, gain a morsel. At the start of your turn, remove up to size morsels and increase your size by the number of morsels removed. You have additional HP equal to 5 times your size.",
+        "desc": "After enemy boosts, get a morsel. You can eat 1 morsel for each morsel you've eaten this combat at the start of your turn (R1: One morsel). Eating gives +5 HP."
       },
       {
         "mote": "Grisha",
@@ -852,8 +852,8 @@
       {
         "mote": "Kative",
         "name": "Tinker",
-        "details": "[Boost 1] {C} Let Me Sharpen That For You: When you move next to an ally or an ally moves next to you, their strikes deal 2 additional damage for the rest of combat.",
-        "desc": "1 BP when adjacent to ally: buff their weapon/attack +2 damage for combat."
+        "details": "[Boost 2X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage.",
+        "desc": "[Boost 2X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage."
       },
       {
         "mote": "Kative",
@@ -876,8 +876,8 @@
       {
         "mote": "Kative",
         "name": "Clay Army",
-        "details": "Create a level 1 character sheet with no motes or race called a \u201cGolem\u201d. [Boost 2] After taking a movement action, spawn a “Golem” in adjacency. The golem acts during your turn. You may only have 4 such golems at once. If more than 4 would exist, select one to be destroyed. If you are removed from combat, they stop taking actions and become blocking terrain.",
-        "desc": "2 BP after moving: summon golem (max 4). They block if you\u2019re gone."
+        "details": "[Boost 4] Before any of your actions, you may place a Clay Golem adjacent which is immortal, cannot move and cannot be moved through. When an enemy takes an action next to one or more clay golems, they take Spirit damage.",
+        "desc": "4 BP before action: summon an immortal golem that does Spirit damage when adjacent enemies take actions."
       },
       {
         "mote": "Kative",
