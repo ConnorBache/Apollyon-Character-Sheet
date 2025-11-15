@@ -876,7 +876,7 @@
       {
         "mote": "Kative",
         "name": "Clay Army",
-        "details": "[Boost 4] Before any of your actions, you may place a Clay Golem adjacent which cannot move and cannot be moved through. When an enemy takes an action next to one or more clay golems, they take Spirit damage.",
+        "details": "[Boost 4] Before any action, you may place a Clay Golem adjacent which cannot move and cannot be moved through. When an enemy takes an action next to one or more clay golems, they take Spirit damage. You may have up to 4 Clay Golems at a time. If you make more, then one is destroyed.",
         "desc": "4 BP before action: summon an immortal golem that does Spirit damage when adjacent enemies take actions."
       },
       {
