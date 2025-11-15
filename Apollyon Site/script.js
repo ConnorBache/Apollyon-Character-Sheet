@@ -852,8 +852,8 @@
       {
         "mote": "Kative",
         "name": "Tinker",
-        "details": "[Boost 2X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage.",
-        "desc": "[Boost 2X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage."
+        "details": "[Boost 4X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage.",
+        "desc": "[Boost 4X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage."
       },
       {
         "mote": "Kative",
