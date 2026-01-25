@@ -84,8 +84,8 @@
     {
       "mote": "Shrail",
       "name": "Unyielding Assault",
-      "details": "[Boost 3] You may attack as a minor action.]",
-      "desc": "Spend 3 BP: convert minor action into free attack."
+      "details": "[Boost 3] You may attack as a minor action.",
+      "desc": "3 BP: attack as a minor action."
     },
     {
       "mote": "Shrail",
@@ -121,7 +121,7 @@
       "mote": "Shrail",
       "name": "Fury Craft",
       "details": "Learn the following Enhancement: [Boost X] When you strike, increase the damage of the strike by 5X. You may not increase the damage by more than 10. If you are the creator of this item, you may not increase the damage by more than 20 instead.",
-      "desc": "Learn the Fury Craft."
+      "desc": "Enhancement: [Boost X] +5X strike damage (cap +10; +20 if creator)."
     },
     {
         "mote": "Pelian",
@@ -199,7 +199,7 @@
         "mote": "Pelian",
         "name": "Zeal Craft",
         "details": "Learn the following Enhancement: Your maximum HP is increased by 30 percent. If you are the creator of this item, then in addition you have [Boost 4] If your health is below half after taking damage you may regain HP equal to 1/4 of your maximum. Once this ability is used, you cannot use it again until the beginning of your next turn.",
-        "desc": "Learn the Zeal Craft."
+        "desc": "Enhancement: +30% max HP; if creator, [Boost 4] below half HP after damage heal 1/4 max (1/turn)."
     },
     {
         "mote": "Isheilah",
@@ -229,13 +229,13 @@
         "mote": "Isheilah",
         "name": "Missed Me",
         "details": "[React] When an enemy hits you with a strike, they glance instead.",
-        "desc": "Reaction: turn a hit into a miss."
+        "desc": "Reaction: turn a hit into a glance."
       },
       {
         "mote": "Isheilah",
         "name": "Tools of the Trade",
         "details": "You may drink any number of potions over the course of an encounter and may drink a potion at the end of your turn. In addition, you gain one potion of your choice at the start of combat.",
-        "desc": "Unlimited potions per combat; free drink at end of turn."
+        "desc": "Drink any # of potions/encounter; drink at end of turn; start combat with 1 potion."
       },
       {
         "mote": "Isheilah",
@@ -247,7 +247,7 @@
         "mote": "Isheilah",
         "name": "Make Fizzle",
         "details": "[React] Once per turn when an enemy boosts, the enemy must pay (Spirit) more BP, or the boost is negated.",
-        "desc": "Reaction: counter enemy cast (they still pay mana)."
+        "desc": "Reaction: once/turn when enemy boosts, they pay +Spirit BP or the boost is negated."
       },
       {
         "mote": "Isheilah",
@@ -259,13 +259,13 @@
         "mote": "Isheilah",
         "name": "Hanged",
         "details": "[Boost X] When you take damage, reduce it by 4X. In addition, your flight increases by 1.",
-        "desc": "Spend BP/mana up to half damage taken; reduce damage by 2\u00d7 spent."
+        "desc": "[Boost X] When you take damage, reduce it by 4X; +1 Flight."
       },
       {
         "mote": "Isheilah",
         "name": "Quick Hands",
         "details": "[Boost 1] Once per turn when you are damaged, you may take a preparing action.",
-        "desc": "1 BP: once/round when damaged, get extra move next turn."
+        "desc": "[Boost 1] Once per turn when you are damaged, you may take a preparing action."
       },
       {
         "mote": "Isheilah",
@@ -277,7 +277,7 @@
         "mote": "Isheilah",
         "name": "Guile Craft",
         "details": "You may always act as if the attack action triggers Cut Down, even with melee weapons. This reaction triggers after the attack resolves. If the creator of this item is wielding it, Whenever you make a Cut Down reaction, it does double damage and the damage it deals cannot be reduced. ",
-        "desc": "Learn the Guile Craft."
+        "desc": "Enhancement: attacks always trigger Cut Down; if creator wielding, Cut Down is double irreducible damage."
       },
       {
         "mote": "Numo",
@@ -312,8 +312,8 @@
       {
         "mote": "Numo",
         "name": "Distract",
-        "details": "[Boost 2] {C} Before you take a minor action, a target enemy cannot declare you as a target for any action until the end of their next turn.]",
-        "desc": "[Boost 2] {C} Before you take a minor action, a target enemy cannot declare you as a target for any action until the end of their next turn.]"
+        "details": "[Boost 2] {C} Before you take a minor action, a target enemy cannot declare you as a target for any action until the end of their next turn.",
+        "desc": "[Boost 2] {C} Before you take a minor action, a target enemy cannot declare you as a target for any action until the end of their next turn."
       },
       {
         "mote": "Numo",
@@ -355,13 +355,13 @@
         "mote": "Numo",
         "name": "Memory Craft",
         "details": "Learn the following Enhancement: Once per combat, at the start of your turn regain a number of boost points equal to your Spirit. If you are the creator, instead regain all your boost points.",
-        "desc": "Learn the Memory Craft."
+        "desc": "Enhancement: 1/combat start of turn regain Spirit BP; if creator, regain all BP."
       },
       {
         "mote": "Etill",
         "name": "Float Away",
         "details": "[Boost 1] When you take non-self damage, you may take a movement action. Your Flight increases by 1.",
-        "desc": "[Boost 1] When you are damaged, you may take a movement action."
+        "desc": "[Boost 1] When you take non-self damage, move; +1 Flight."
       },
       {
         "mote": "Etill",
@@ -433,7 +433,7 @@
         "mote": "Etill",
         "name": "Flow Craft",
         "details": "You may exchange 2 minor actions for a major action, and vice versa. You may also substitute 2 movement actions for a minor action, or 1 minor action for a movement action. This substitution may be done before or after any of your actions. If you are the creator, you gain a movement action at the start of each of your turns.",
-        "desc": "Learn the Flow Craft."
+        "desc": "Enhancement: trade action types; if creator, +1 move at start of each turn."
       },
       {
         "mote": "Ursa",
@@ -510,8 +510,8 @@
       {
         "mote": "Ursa",
         "name": "Dream Craft",
-        "details": "Learn the following Enhancement: If you are the creator, gain 5 Spirit instead and increase your Flight by 1.",
-        "desc": "Learn the following Enhancement: Gain 10 boost points. If you are the creator, gain 5 Spirit instead."
+        "details": "Learn the following Enhancement: Gain 10 boost points. If you are the creator, instead gain 5 Spirit and increase your Flight by 1.",
+        "desc": "Enhancement: gain 10 BP; if creator, instead gain 5 Spirit and +1 Flight."
       },
       {
         "mote": "Lichor",
@@ -589,7 +589,7 @@
         "mote": "Lichor",
         "name": "Blood Craft",
         "details": "Learn the following Enhancement: As a minor action, heal equal to twice your DR. If you are the creator, instead heal 4 times your DR.",
-        "desc": "Learn the Blood Craft."
+        "desc": "Enhancement: minor heal 2\u00d7DR (4\u00d7DR if creator)."
       },
       {
         "mote": "Dawel",
@@ -625,7 +625,7 @@
         "mote": "Dawel",
         "name": "Without a Heartbeat",
         "details": "When you would die, instead of dying you gain 2 ‘heartbeats.’ You lose a heartbeat at the end of each of your turns. When you lose your last heartbeat, you die.",
-        "desc": "[Boost 2] When you target an enemy with a cast action, they may not take any boosts until the end of your next turn."
+        "desc": "On death: gain 2 heartbeats; lose 1/end of turn; die when heartbeats run out."
       },
       {
         "mote": "Dawel",
@@ -667,7 +667,7 @@
         "mote": "Dawel",
         "name": "Silence Craft",
         "details": "Learn the following Enhancement:  When someone glances against you, regain 3 boost points. If you are the creator, regain an additional 3 boost points when someone glances against you.",
-        "desc": "Learn the Silence Craft."
+        "desc": "Enhancement: when someone glances vs you, regain 3 BP (+3 more if creator)."
       },
       {
         "mote": "Grisha",
@@ -714,8 +714,8 @@
       {
         "mote": "Grisha",
         "name": "Entropy",
-        "details": "Enemies that start their turn within 6 blocks of you take damage equal your Spirit at the start of your turn, ignoring DR.",
-        "desc": "Nearby enemies take Spirit/2 damage at start of their turn, ignoring DR."
+        "details": "Enemies that start their turn within 6 blocks of you take damage equal to your Spirit at the start of their turn, ignoring DR.",
+        "desc": "Enemies that start their turn within 6 blocks of you take Spirit damage, ignoring DR."
       },
       {
         "mote": "Grisha",
@@ -733,7 +733,7 @@
         "mote": "Grisha",
         "name": "Swallow",
         "details": "Your size is 1. Every time an enemy boosts, gain a morsel. At the start of your turn, remove up to size morsels and increase your size by the number of morsels removed. You have additional HP equal to 10 times your size.",
-        "desc": "After enemy boosts, get a morsel. You can eat 1 morsel for each morsel you've eaten this combat at the start of your turn (R1: One morsel). Eating gives +5 HP."
+        "desc": "Size starts 1; gain a morsel when enemies boost; start of turn eat up to size morsels to grow; bonus HP = 10\u00d7size."
       },
       {
         "mote": "Grisha",
@@ -745,7 +745,7 @@
         "mote": "Grisha",
         "name": "Ruin Craft",
         "details": "Learn the following Enhancement: When you hit enemies, you may ignore their DR. If you are the creator, you may reduce the target’s Grit by 2 when you hit with a strike.",
-        "desc": "Learn the Ruin Craft."
+        "desc": "Enhancement: on hit you may ignore target DR; if creator, strike hits also -2 Grit."
       },
       {
         "mote": "Anavani",
@@ -805,7 +805,7 @@
         "mote": "Anavani",
         "name": "Ascend",
         "details": "Before you take a minor action, you may appear anywhere within 5 blocks of your current location, and change your Height by up to 1, to a maximum of your Supported Height+Flight.",
-        "desc": "When you take a minor action, you may appear anywhere within 5 blocks of your current location."
+        "desc": "Before minor: teleport within 5; change Height by up to 1 (max Supported Height+Flight)."
       },
       {
         "mote": "Anavani",
@@ -823,7 +823,7 @@
         "mote": "Anavani",
         "name": "Ascendance Craft",
         "details": "Learn the following Enhancement: Hostile creatures within 15 blocks move at 1/2 speed. Effect: Hostile creatures within 15 blocks move at 1/2 speed. If you are the creator, enemies within 6 blocks also have their agility halved. This rounds up, and has no effect on creatures with Agility less than 2..",
-        "desc": "Learn the Ascendance Craft."
+        "desc": "Enhancement: hostiles within 15 move at half speed; if creator, enemies within 6 also have Agility halved."
       },
       {
         "mote": "Kative",
@@ -853,7 +853,7 @@
         "mote": "Kative",
         "name": "Tinker",
         "details": "[Boost 4X] At the start of your turn, you and each adjacent ally's weapon does Xd6 additional weapon damage to a maximum of 10d6. This may only improve each ally once. This affects only one weapon they are using.",
-        "desc": "[Boost 4X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage."
+        "desc": "[Boost 4X] Start of turn: you + adjacent allies gain +Xd6 weapon damage (cap 10d6); each ally once."
       },
       {
         "mote": "Kative",
@@ -883,7 +883,7 @@
         "mote": "Kative",
         "name": "Adaptive Armor",
         "details": "After you take damage from an enemy, gain 1 DR.",
-        "desc": "On damage: mark source, gain +2 Adaptive DR vs them (once/turn)."
+        "desc": "After you take damage from an enemy, gain 1 DR."
       },
       {
         "mote": "Kative",
@@ -901,7 +901,7 @@
         "mote": "Kative",
         "name": "Artifice Craft",
         "details": "Learn the following Enhancement: When creating this item, you may add any other Mote Craft enhancement to this item, without the text which empowers the creator of the item. If you are the creator,  you may add a second Mote Craft enhancement in the same way as the first without counting against maximum enhancements on the item or taking additional downtime.",
-        "desc": "Learn the Artifice Craft."
+        "desc": "Enhancement: add another Mote Craft enhancement (no creator text); if creator, add a second similarly."
       },
       {
         "mote": "Morae",
@@ -937,7 +937,7 @@
         "mote": "Morae",
         "name": "Martyr",
         "details": "At the start of your turn, you may select any ally within 6 blocks. When they take damage from a source other than themselves, you take half the damage and they take the other half. The damage you receive is not affected by DR. If  you are cleansed or the target is cleansed, this effect ends. You may end the effect at the end of any action.",
-        "desc": "When you cast a spell, you may spend HP instead of mana at a rate of 2 HP to 1 mana."
+        "desc": "Start of turn: link ally within 6; split their non-self damage with you (your half ignores DR) until cleansed/ended."
       },
       {
         "mote": "Morae",
@@ -949,13 +949,13 @@
         "mote": "Morae",
         "name": "Fortune Teller",
         "details": "Gain 3 ‘Fortunes.’ When an ally or enemy rolls a d20, you can expend a fortune to make the roll a 1 or 20.",
-        "desc": "On melee crit: enemy is forced to stay and target you until next turn."
+        "desc": "Gain 3 Fortunes; spend one when someone rolls d20 to make it a 1 or 20."
       },
       {
         "mote": "Morae",
         "name": "Prediction",
         "details": "When you land a critical hit with a strike, declare an action. The target takes damage equal to your spirit each time they take that action. The same action may not be predicted twice at the same time. If the target is cleansed, the effect ends.",
-        "desc": "On crit: declare action; target takes Spirit damage each time they use it until your next turn."
+        "desc": "On crit: declare an action; target takes Spirit damage each time they take it until cleansed (no duplicate predictions)."
       },
       {
         "mote": "Morae",
@@ -967,7 +967,7 @@
         "mote": "Morae",
         "name": "Sever Fate",
         "details": "When you land a critical hit, name an action. The target must spend 5 BP to use that action. If the target is cleansed, the effect ends.",
-        "desc": "On Crit, reduce enemy Max BP and BP by your Strength."
+        "desc": "On crit: name an action; target must spend 5 BP to use it until cleansed."
       },
       {
         "mote": "Morae",
@@ -979,7 +979,7 @@
         "mote": "Morae",
         "name": "Fate Craft",
         "details": "Learn the following Enhancement: If you would hit with an attack, you instead crit. If you are the creator, then once per round when you glance with a strike you can choose to hit instead.",
-        "desc": "Learn the Fate Craft."
+        "desc": "Enhancement: hits become crits; if creator, 1/round a glance can become a hit."
       }
 
       ];
@@ -2843,7 +2843,7 @@
   }
 
   /** Populate imported abilities with their data */
-  function populateImportedAbilities(abilitiesWrap, moteSelect, abilitiesData) {
+function populateImportedAbilities(abilitiesWrap, moteSelect, abilitiesData) {
     const list = abilitiesByMote[moteSelect.value] || [{"name": "", "desc": "", "details": ""}];
     const abilitySelects = abilitiesWrap.querySelectorAll("select");
     const abilityDescs = abilitiesWrap.querySelectorAll("textarea");
