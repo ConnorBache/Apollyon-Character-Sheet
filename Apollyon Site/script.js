@@ -498,8 +498,8 @@
       {
         "mote": "Ursa",
         "name": "Dream of Time Gone By",
-        "details": "Gain 2 powers: \n[Boost 4] {C} At the start of your turn, mark your current HP, Mana and position. This is your “Set State.”\n [Boost 4] At the start of your turn, return to your “Set State and you no longer have a Set State.”\n You may not use both powers in the same turn.",
-        "desc": "4 BP: set a checkpoint (HP, Mana, position); 4 BP later to return to it."
+        "details": "Learn 2 powers: [Boost 4] At the start or end of your turn, mark your current HP and position.\n This is your “Set State.” If you are cleansed, you lose your Set State.\n[Boost 4] At the start or end of your turn, return to your Set State and you no longer have a Set State.\nYou may not use both powers in the same turn.",
+        "desc": "4 BP: set a checkpoint (HP, position); 4 BP later to return to it."
       },
       {
         "mote": "Ursa",
