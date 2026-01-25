@@ -222,19 +222,19 @@
       {
         "mote": "Isheilah",
         "name": "Dodge",
-        "details": "Gain the following Reaction: [Dodge: Trigger: Enemy lands a glancing blow against you. Effect: They do no damage.]",
+        "details": "[React] When an enemy lands a glancing blow against you, the strike is negated.",
         "desc": "Reaction: nullify glancing blow damage."
       },
       {
         "mote": "Isheilah",
-        "name": "Big Whiff",
-        "details": "Gain the following Reaction: [Missed Me: Trigger: An enemy beat your AC on an attack. Effect: For the purposes of this attack, the enemy failed to beat your AC.]",
+        "name": "Missed Me",
+        "details": "[React] When an enemy hits you with a strike, they glance instead.",
         "desc": "Reaction: turn a hit into a miss."
       },
       {
         "mote": "Isheilah",
         "name": "Tools of the Trade",
-        "details": "You may drink any number of potions over the course of a combat and may drink a potion at the end of your turn.",
+        "details": "You may drink any number of potions over the course of an encounter and may drink a potion at the end of your turn. In addition, you gain one potion of your choice at the start of combat.",
         "desc": "Unlimited potions per combat; free drink at end of turn."
       },
       {
@@ -246,7 +246,7 @@
       {
         "mote": "Isheilah",
         "name": "Make Fizzle",
-        "details": "Gain the following reaction: [Counterspell: Trigger: Enemy declares a cast action. Effect: The cast action fails, but they still spend the mana.]",
+        "details": "[React] Once per turn when an enemy boosts, the enemy must pay (Spirit) more BP, or the boost is negated.",
         "desc": "Reaction: counter enemy cast (they still pay mana)."
       },
       {
@@ -258,13 +258,13 @@
       {
         "mote": "Isheilah",
         "name": "Hanged",
-        "details": "Whenever you take damage, you may spend boost points or mana up to half the amount of damage dealt rounded up. Reduce the amount of damage you take by double the resources you spent.",
+        "details": "[Boost X] When you take damage, reduce it by 4X. In addition, your flight increases by 1.",
         "desc": "Spend BP/mana up to half damage taken; reduce damage by 2\u00d7 spent."
       },
       {
         "mote": "Isheilah",
-        "name": "Quick Foot",
-        "details": "Gain the following Boost: [Sprint: Once per round when you are damaged, you may spend 1 boost point to gain a movement action for your next turn.]",
+        "name": "Quick Hands",
+        "details": "[Boost 1] Once per turn when you are damaged, you may take a preparing action.",
         "desc": "1 BP: once/round when damaged, get extra move next turn."
       },
       {
@@ -360,7 +360,7 @@
       {
         "mote": "Etill",
         "name": "Float Away",
-        "details": "[Boost 1] When you are damaged, you may take a movement action.",
+        "details": "[Boost 1] When you take non-self damage, you may take a movement action. Your Flight increases by 1.",
         "desc": "[Boost 1] When you are damaged, you may take a movement action."
       },
       {
@@ -510,7 +510,7 @@
       {
         "mote": "Ursa",
         "name": "Dream Craft",
-        "details": "Learn the following Enhancement: Gain 10 boost points. If you are the creator, gain 5 Spirit instead.",
+        "details": "Learn the following Enhancement: If you are the creator, gain 5 Spirit instead and increase your Flight by 1.",
         "desc": "Learn the following Enhancement: Gain 10 boost points. If you are the creator, gain 5 Spirit instead."
       },
       {
@@ -623,8 +623,8 @@
       },
       {
         "mote": "Dawel",
-        "name": "Shut Them Up",
-        "details": "[Boost 2] When you target an enemy with a cast action, they may not take any boosts until the end of your next turn.",
+        "name": "Without a Heartbeat",
+        "details": "When you would die, instead of dying you gain 2 ‘heartbeats.’ You lose a heartbeat at the end of each of your turns. When you lose your last heartbeat, you die.",
         "desc": "[Boost 2] When you target an enemy with a cast action, they may not take any boosts until the end of your next turn."
       },
       {
@@ -714,7 +714,7 @@
       {
         "mote": "Grisha",
         "name": "Entropy",
-        "details": "Enemies that start their turn within 6 blocks of you take damage equal to 1/2 of your Spirit at the start of their turn, rounding up, ignoring DR.",
+        "details": "Enemies that start their turn within 6 blocks of you take damage equal your Spirit at the start of your turn, ignoring DR.",
         "desc": "Nearby enemies take Spirit/2 damage at start of their turn, ignoring DR."
       },
       {
@@ -732,7 +732,7 @@
       {
         "mote": "Grisha",
         "name": "Swallow",
-        "details": "Your size is 1. Every time an enemy boosts, gain a morsel. At the start of your turn, remove up to size morsels and increase your size by the number of morsels removed. You have additional HP equal to 5 times your size.",
+        "details": "Your size is 1. Every time an enemy boosts, gain a morsel. At the start of your turn, remove up to size morsels and increase your size by the number of morsels removed. You have additional HP equal to 10 times your size.",
         "desc": "After enemy boosts, get a morsel. You can eat 1 morsel for each morsel you've eaten this combat at the start of your turn (R1: One morsel). Eating gives +5 HP."
       },
       {
@@ -804,13 +804,13 @@
       {
         "mote": "Anavani",
         "name": "Ascend",
-        "details": "When you take a minor action, you may appear anywhere within 5 blocks of your current location.",
+        "details": "Before you take a minor action, you may appear anywhere within 5 blocks of your current location, and change your Height by up to 1, to a maximum of your Supported Height+Flight.",
         "desc": "When you take a minor action, you may appear anywhere within 5 blocks of your current location."
       },
       {
         "mote": "Anavani",
         "name": "Too High",
-        "details": "[Boost 4] When you are hit or glanced by a melee strike, it glances and you may take a move action after the strike resolves which cannot be reacted to.",
+        "details": "[Boost 4] When you are hit or glanced by a melee strike, you may take a move action after the strike resolves which cannot be reacted to. If the strike hit, it instead glances. Increase your Flight by 1.",
         "desc": "4 BP on melee hit: make it glance; free move after (unreactable)."
       },
       {
@@ -852,7 +852,7 @@
       {
         "mote": "Kative",
         "name": "Tinker",
-        "details": "[Boost 4X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage.",
+        "details": "[Boost 4X] At the start of your turn, you and each adjacent ally's weapon does Xd6 additional weapon damage to a maximum of 10d6. This may only improve each ally once. This affects only one weapon they are using.",
         "desc": "[Boost 4X] At the start of your turn, an adjacent ally's weapon does Xd6 additional weapon damage."
       },
       {
@@ -882,7 +882,7 @@
       {
         "mote": "Kative",
         "name": "Adaptive Armor",
-        "details": "When you take damage from an enemy, gain 2 \u201cAdaptive\u201d and note the enemy that did the damage. For the rest of combat, whenever you take damage from that source, you may gain \u201cAdaptive\u201d DR for the rest of turn. You may only gain DR once per turn in this way.",
+        "details": "After you take damage from an enemy, gain 1 DR.",
         "desc": "On damage: mark source, gain +2 Adaptive DR vs them (once/turn)."
       },
       {
@@ -893,7 +893,7 @@
       },
       {
         "mote": "Kative",
-        "name": "Gizmos",
+        "name": "Cogworks",
         "details": "[Boost X] At the start of your turn, select an option from the following table with a ‘Boost Points’ characteristic of X or less. \nBoost Points\nName\nOutcome\n1\nPortable Wall\nCreate a 1 block long by 4 blocks wide wall that cannot be seen through or moved over, with at least one block of that wall being within 8 blocks. This has 4xSpirit HP.\n2\nMurder Wall\nCreate a 1 block long by 4 blocks wide wall that can be seen through by allies only (they can also direct attacks through the wall), with at least one block of that wall being within 8 blocks. This has 3xSpirit HP.\n2\nBlast Rock\nDestroy an obstacle that was placed in this combat.\n2\nConfusion Gas\nSelect an unoccupied block within 8 blocks. It cannot be moved through and no one adjacent to that block can take the attack action.",
         "desc": "Spend X BP: deploy a gizmo (wall, blast, or gas) depending on choice."
       },
@@ -936,7 +936,7 @@
       {
         "mote": "Morae",
         "name": "Martyr",
-        "details": "When you cast a spell, you may spend HP instead of mana at a rate of 2 HP to 1 mana.",
+        "details": "At the start of your turn, you may select any ally within 6 blocks. When they take damage from a source other than themselves, you take half the damage and they take the other half. The damage you receive is not affected by DR. If  you are cleansed or the target is cleansed, this effect ends. You may end the effect at the end of any action.",
         "desc": "When you cast a spell, you may spend HP instead of mana at a rate of 2 HP to 1 mana."
       },
       {
@@ -947,14 +947,14 @@
       },
       {
         "mote": "Morae",
-        "name": "Born to Die",
-        "details": "When you land a critical hit in melee range, the target cannot willingly move out of your melee range and must target you with all actions if possible until it is no longer in your melee range until the end of its next turn.",
+        "name": "Fortune Teller",
+        "details": "Gain 3 ‘Fortunes.’ When an ally or enemy rolls a d20, you can expend a fortune to make the roll a 1 or 20.",
         "desc": "On melee crit: enemy is forced to stay and target you until next turn."
       },
       {
         "mote": "Morae",
         "name": "Prediction",
-        "details": "When you land a critical hit, declare an action. The target takes (Your Spirit) damage each time they take that action until the start of your next turn.",
+        "details": "When you land a critical hit with a strike, declare an action. The target takes damage equal to your spirit each time they take that action. The same action may not be predicted twice at the same time. If the target is cleansed, the effect ends.",
         "desc": "On crit: declare action; target takes Spirit damage each time they use it until your next turn."
       },
       {
@@ -966,7 +966,7 @@
       {
         "mote": "Morae",
         "name": "Sever Fate",
-        "details": "On Crit, reduce enemy Max BP and BP by your Strength.",
+        "details": "When you land a critical hit, name an action. The target must spend 5 BP to use that action. If the target is cleansed, the effect ends.",
         "desc": "On Crit, reduce enemy Max BP and BP by your Strength."
       },
       {
