@@ -474,8 +474,8 @@
       {
         "mote": "Ursa",
         "name": "Sudden Sleep",
-        "details": " [Boost 6] As a major action, your mana and HP are restored to their maximum values. This ends your turn.",
-        "desc": " [Boost 6] As a major action, your mana and HP are restored to their maximum values. This ends your turn."
+        "details": "[Boost 6] As a major action, your HP is restored to its maximum value, and you regain half your maximum Mana. This ends your turn.",
+        "desc": "[Boost 6] As a major action, regain max HP and half max Mana. This ends your turn."
       },
       {
         "mote": "Ursa",
