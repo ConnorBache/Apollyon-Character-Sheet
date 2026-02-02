@@ -114,8 +114,8 @@
     {
       "mote": "Shrail",
       "name": "Fury Casting",
-      "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Blood, Oath, Wild. Also, learn 3 spells.",
-      "desc": "Spirit Mana; choose Blood/Oath/Wild; learn 3 spells."
+      "details": "Gain 10 Mana, a Soul Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Soul + 2 Tokens; learn 3 spells."
     },
     {
       "mote": "Shrail",
@@ -192,8 +192,8 @@
     {
         "mote": "Pelian",
         "name": "Zeal Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Hollow, Oath, Soul. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Hollow/Oath/Soul; learn 3 spells."
+      "details": "Gain 10 Mana, a Hollow Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Hollow + 2 Tokens; learn 3 spells."
     },
     {
         "mote": "Pelian",
@@ -270,8 +270,8 @@
       {
         "mote": "Isheilah",
         "name": "Guile Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Wild, Illusion, Fey. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Wild/Illusion/Fey; learn 3 spells."
+      "details": "Gain 10 Mana, a Pact Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Pact + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Isheilah",
@@ -348,8 +348,8 @@
       {
         "mote": "Numo",
         "name": "Memory Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Mind, Divination, Hollow. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Mind/Divination/Hollow; learn 3 spells."
+      "details": "Gain 10 Mana, an Arcane Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Arcane + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Numo",
@@ -426,8 +426,8 @@
       {
         "mote": "Etill",
         "name": "Flow Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Elemental, Wild, Fey. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Elemental/Wild/Fey; learn 3 spells."
+      "details": "Gain 10 Mana, an Elemental Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Elemental + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Etill",
@@ -504,8 +504,8 @@
       {
         "mote": "Ursa",
         "name": "Dream Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Illusion, Shadow, Soul. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Illusion/Shadow/Soul; learn 3 spells."
+      "details": "Gain 10 Mana, a Phantasm Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Phantasm + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Ursa",
@@ -582,8 +582,8 @@
       {
         "mote": "Lichor",
         "name": "Blood Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Blood, Soul, Hollow. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Blood/Soul/Hollow; learn 3 spells."
+      "details": "Gain 10 Mana, a Blood Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Blood + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Lichor",
@@ -660,8 +660,8 @@
       {
         "mote": "Dawel",
         "name": "Silence Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Shadow, Void, Divination. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Shadow/Void/Divination; learn 3 spells."
+      "details": "Gain 10 Mana, a Shadow Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Shadow + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Dawel",
@@ -738,8 +738,8 @@
       {
         "mote": "Grisha",
         "name": "Ruin Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Shadow, Void, Elemental. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Shadow/Void/Elemental; learn 3 spells."
+      "details": "Gain 10 Mana, a Void Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Void + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Grisha",
@@ -816,8 +816,8 @@
       {
         "mote": "Anavani",
         "name": "Ascendance Casting",
-        "details": "Gain Spirit Mana (this increases if you gain Spirit). Gain access to one of the following aspects of magic: Elemental, Astral, Arcane. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Elemental/Astral/Arcane; learn 3 spells."
+      "details": "Gain 10 Mana, an Astral Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Astral + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Anavani",
@@ -888,8 +888,8 @@
       {
         "mote": "Kative",
         "name": "Artifice Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Astral, Runic, Arcane. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Astral/Runic/Arcane; learn 3 spells."
+      "details": "Gain 10 Mana, a Rune Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Rune + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Kative",
@@ -972,8 +972,8 @@
       {
         "mote": "Morae",
         "name": "Fate Casting",
-        "details": "Gain Spirit Mana (this increases if you gain spirit). Gain access to one of the following aspects of magic: Wild, Divination, Soul. Also, learn 3 spells.",
-        "desc": "Spirit Mana; choose Wild/Divination/Soul; learn 3 spells."
+      "details": "Gain 10 Mana, a Fate Casting Token and 2 other Casting Tokens of your choice. Also, learn 3 spells. You may take this ability more than once.",
+      "desc": "10 Mana; Fate + 2 Tokens; learn 3 spells."
       },
       {
         "mote": "Morae",
