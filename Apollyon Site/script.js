@@ -708,8 +708,8 @@
       {
         "mote": "Grisha",
         "name": "Boundless Hunger",
-        "details": "When you regain BP, you gain Max BP instead.",
-        "desc": "When you regain BP, you gain Max BP instead."
+        "details": "When you regain X BP, you gain X Max BP instead.",
+        "desc": "When you regain X BP, you gain X Max BP instead."
       },
       {
         "mote": "Grisha",
