@@ -96,8 +96,8 @@
     {
       "mote": "Shrail",
       "name": "Masochism",
-      "details": "Whenever you take damage, gain a number of boost points equal to the amount of damage you took divided by five, rounding up.",
-      "desc": "Gain BP equal to damage ÷ 5 (round up) whenever hurt."
+      "details": "Whenever you take damage, regain a number of boost points equal to the amount of damage you took divided by five, rounding up.",
+      "desc": "Regain BP equal to damage ÷ 5 (round up) whenever hurt."
     },
     {
       "mote": "Shrail",
