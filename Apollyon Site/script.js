@@ -186,8 +186,8 @@
     {
         "mote": "Pelian",
         "name": "Never Surrender",
-        "details": "[Boost 3] When you are damaged, gain half Spirit DR for that damage. If the enemy ignores DR, they instead ignore half DR for that damage",
-        "desc": "3 BP: gain half Spirit as DR vs that damage (even partly against ignore DR)."
+        "details": "[Boost 2] Once per round when you take damage, halve that damage.",
+        "desc": "[Boost 2] Once per round when you take damage, halve that damage.."
     },
     {
         "mote": "Pelian",
@@ -216,8 +216,8 @@
       {
         "mote": "Isheilah",
         "name": "Are You Sure About That?",
-        "details": "[4+X] When you take the Block or Roll reaction. If you do, redirect the strike to someone within one block of you. If X is greater than 1, you may redirect an enemy into hitting themselves.",
-        "desc": "[4+X] When you take the Block or Roll reaction. If you do, redirect the strike to someone within one block of you. If X is greater than 1, you may redirect an enemy into hitting themselves."
+        "details": "[4+N] When you take the Block or Roll reaction. If you do, redirect the strike to someone within one block of you. If X is greater than 4, you may redirect an enemy into hitting themselves.",
+        "desc": "[4+N] React to a strike and make them target someone else for 4, or themselves for 8."
       },
       {
         "mote": "Isheilah",
@@ -557,9 +557,9 @@
       },
       {
         "mote": "Lichor",
-        "name": "Stop Bleeding",
-        "details": "When given a cleansable effect, you may decide to not be given it instead.",
-        "desc": "When given a cleansable effect, you may decide to not be given it instead."
+        "name": "Blood Letting",
+        "details": "Gain an amount of HP equal to your Grit. In addition, after you gain a cleansable effect, you may cleanse yourself of that effect and take irreducible damage equal to your Grit to a minimum of 0 damage.",
+        "desc": "+Grit HP, and when you take a debuff, you can cleanse it by taking Grit damage."
       },
       {
         "mote": "Lichor",
@@ -606,8 +606,8 @@
       {
         "mote": "Dawel",
         "name": "Unspeak",
-        "details": "[Boost N] When an enemy declares a boost where they spent N boost points, negate the boost. Resources are not spent, but they may not declare the same boost on this trigger again. After a boost fully resolves, it cannot be unspoken.",
-        "desc": "X BP: cancel an enemy boost as declared (they regain BP)."
+        "details": "[Boost N] At the start of your turn select an enemy. They cannot use boosts which have a cost under N until the start of your next turn. You may choose N when you boost.",
+        "desc": "N BP: Enemy can't boost for less than N."
       },
       {
         "mote": "Dawel",
@@ -618,8 +618,8 @@
       {
         "mote": "Dawel",
         "name": "Unheard, Unseen",
-        "details": "[Boost 2] When an enemy hits you with a strike, they glance.",
-        "desc": "[Boost 2] When an enemy hits you with a strike, they glance."
+        "details": "Ranged strikes always glance against you. In addition you gain the following Power: \n[Boost N] When an enemy hits you with a strike, you gain 3N AC for that strike. This can cause the strike to glance.",
+        "desc": "Ranged strikes glance, [Boost N] When an enemy hits you with a strike, increase AC by 3N."
       },
       {
         "mote": "Dawel",
@@ -654,8 +654,8 @@
       {
         "mote": "Dawel",
         "name": "Not There",
-        "details": "[Boost 2] When you are affected by an ability, casts, boost, reaction or attack which did not target you, you are unaffected. This cannot be used against effects caused by abilities, casts, boosts, reactions and attacks which did target you.",
-        "desc": "[Boost 2] When you are affected by an ability, casts, boost, reaction or attack which did not target you, you are unaffected. This cannot be used against effects caused by abilities, casts, boosts, reactions and attacks which did target you."
+        "details": "[Boost 2] When you are damaged by an Area effect, or an effect which is not tied to an action which targets you, you take no damage.",
+        "desc": "[Boost 2] When you are damaged by an Area effect, or an effect which is not tied to an action which targets you, you take no damage."
       },
       {
         "mote": "Dawel",
@@ -810,8 +810,8 @@
       {
         "mote": "Anavani",
         "name": "Too High",
-        "details": "[Boost 4] When you are hit or glanced by a melee strike, you may take a move action after the strike resolves which cannot be reacted to. If the strike hit, it instead glances. Increase your Flight by 1.",
-        "desc": "4 BP on melee hit: make it glance; free move after (unreactable)."
+        "details": "[Boost 4] When you are hit or glanced by a melee strike, you may increase your AC by your second lowest attribute and take a move action after the strike resolves which cannot be reacted to. Increase your Flight by 1.",
+        "desc": "Gain +1 flight. [4] on struck: increase AC by second lowest attribute; free move after (unreactable)."
       },
       {
         "mote": "Anavani",
@@ -906,8 +906,8 @@
       {
         "mote": "Morae",
         "name": "Turning The Wheel",
-        "details": "[Boost 4] Sever the Thread: When an enemy declares a strike against you. The strike is nullified.",
-        "desc": "[Boost 4] Sever the Thread: When an enemy declares a strike against you. The strike is nullified."
+        "details": "[Boost 4+N] When an enemy makes a strike roll against you and does not land a Critical Hit, reduce their strike roll by N. If their strike roll fails to exceed your AC, you take no damage from the strike. You may choose N when you boost. ",
+        "desc": "[Boost 4+N] Boost AC by N, negate strike if it glanced."
       },
       {
         "mote": "Morae",
