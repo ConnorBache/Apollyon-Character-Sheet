@@ -810,7 +810,7 @@
       {
         "mote": "Anavani",
         "name": "Too High",
-        "details": "[Boost 4] When you are hit or glanced by a melee strike, you may increase your AC by your second lowest attribute and take a move action after the strike resolves which cannot be reacted to. Increase your Flight by 1.",
+        "details": "[Boost 4] When you are hit or glanced by a melee strike, you may increase your AC by your second lowest attribute for the rest of the strike and take a move action after the strike resolves which cannot be reacted to. Increase your Flight by 1.",
         "desc": "Gain +1 flight. [4] on struck: increase AC by second lowest attribute; free move after (unreactable)."
       },
       {
