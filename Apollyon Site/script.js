@@ -1097,23 +1097,25 @@
       tr.appendChild(el("td", "py-2 pr-2 font-medium", label));
 
       const base = input({ type: "number", value: 0, min: 0 });
+      const race = input({ type: "number", value: 0 });
       const mod = input({ type: "number", value: 0 });
+      const item = input({ type: "number", value: 0 });
       const temp = input({ type: "number", value: 0 });
       const level = input({ type: "number", value: 0 });
       const mult = input({ type: "number", value: 1, step: "0.01", max: 9.99, className: "w-14" });
       const total = input({ type: "number", value: 0, readOnly: true });
 
       const recalc = () => {
-        const sum = Number(base.value || 0) + Number(mod.value || 0) + Number(temp.value || 0) + Number(level.value || 0);
+        const sum = Number(base.value || 0) + Number(race.value || 0) + Number(mod.value || 0) + Number(item.value || 0) + Number(temp.value || 0) + Number(level.value || 0);
         const m = Number(mult.value || 1);
         total.value = Math.ceil(sum * m);
       };
 
-      [base, mod, temp, level, mult].forEach((ctrl) => ctrl.addEventListener("input", recalc));
+      [base, race, mod, item, temp, level, mult].forEach((ctrl) => ctrl.addEventListener("input", recalc));
       coreRecalcs.push(recalc);
       recalc();
 
-      [base, mod, temp, level, mult, total].forEach((ctrl) => {
+      [base, race, mod, item, temp, level, mult, total].forEach((ctrl) => {
         const td = el("td", "py-1 pr-1");
         td.appendChild(ctrl);
         tr.appendChild(td);
@@ -1144,6 +1146,7 @@
       }
       
       const mod = input({ type: "number", value: 0 });
+      const item = input({ type: "number", value: 0 });
       const temp = input({ type: "number", value: 0 });
       
       // Attribute multiplier count input (0-4)
@@ -1222,22 +1225,22 @@
         if (def.key === "Max HP") {
           // Base HP = 6 × Grit Total + 30
           const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit
-          const gritTotal = gritRow ? gritRow.querySelectorAll('input')[5].value || 0 : 0;
+          const gritTotal = gritRow ? gritRow.querySelectorAll('input')[7].value || 0 : 0;
           base.value = 6 * Number(gritTotal) + 30;
         } else if (def.key === "BP") {
           // Base BP = 2 × Spirit Total + 2
           const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit
-          const spiritTotal = spiritRow ? spiritRow.querySelectorAll('input')[5].value || 0 : 0;
+          const spiritTotal = spiritRow ? spiritRow.querySelectorAll('input')[7].value || 0 : 0;
           base.value = 2 * Number(spiritTotal) + 2;
         } else if (def.key === "AC") {
           // Base AC = 10 + Agility Total
           const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility
-          const agilityTotal = agilityRow ? agilityRow.querySelectorAll('input')[5].value || 0 : 0;
+          const agilityTotal = agilityRow ? agilityRow.querySelectorAll('input')[7].value || 0 : 0;
           base.value = 10 + Number(agilityTotal);
         } else if (def.key === "Speed") {
           // Base Speed = Speed Total
           const speedRow = document.querySelector('#coreAttributes tr:nth-child(5)'); // Speed
-          const speedTotal = speedRow ? speedRow.querySelectorAll('input')[5].value || 0 : 0;
+          const speedTotal = speedRow ? speedRow.querySelectorAll('input')[7].value || 0 : 0;
           base.value = Number(speedTotal);
         }
         
@@ -1256,29 +1259,29 @@
             let coreAttrValue = 0;
             if (attrType === "Str") {
               const strengthRow = document.querySelector('#coreAttributes tr:nth-child(1)'); // Strength
-              coreAttrValue = strengthRow ? Number(strengthRow.querySelectorAll('input')[5].value || 0) : 0;
+              coreAttrValue = strengthRow ? Number(strengthRow.querySelectorAll('input')[7].value || 0) : 0;
             } else if (attrType === "Agi") {
               const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility
-              coreAttrValue = agilityRow ? Number(agilityRow.querySelectorAll('input')[5].value || 0) : 0;
+              coreAttrValue = agilityRow ? Number(agilityRow.querySelectorAll('input')[7].value || 0) : 0;
             } else if (attrType === "Gri") {
               const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit
-              coreAttrValue = gritRow ? Number(gritRow.querySelectorAll('input')[5].value || 0) : 0;
+              coreAttrValue = gritRow ? Number(gritRow.querySelectorAll('input')[7].value || 0) : 0;
             } else if (attrType === "Spi") {
               const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit
-              coreAttrValue = spiritRow ? Number(spiritRow.querySelectorAll('input')[5].value || 0) : 0;
+              coreAttrValue = spiritRow ? Number(spiritRow.querySelectorAll('input')[7].value || 0) : 0;
             }
             
             attrSum += coreAttrValue * multiplier;
           }
         });
         
-        const sum = Number(base.value || 0) + Number(mod.value || 0) + Number(temp.value || 0) + attrSum;
+        const sum = Number(base.value || 0) + Number(mod.value || 0) + Number(item.value || 0) + Number(temp.value || 0) + attrSum;
         const m = Number(mult.value || 1);
         end.value = Math.ceil(sum * m);
       };
 
       // Add event listeners
-      [base, mod, temp, mult, attrCount].forEach((i) => i.addEventListener("input", recalc));
+      [base, mod, item, temp, mult, attrCount].forEach((i) => i.addEventListener("input", recalc));
       
       // Special handling for attrCount to update multipliers display
       attrCount.addEventListener("input", updateAttrMultipliers);
@@ -1295,7 +1298,7 @@
       recalc();
 
       // Create the main row cells
-      [base, mod, temp, attrCount, mult, end].forEach((ctrl) => {
+      [base, mod, item, temp, attrCount, mult, end].forEach((ctrl) => {
         const td = el("td", "py-1 pr-1");
         const ctrlWrap = el("div", "");
         ctrlWrap.appendChild(ctrl);
@@ -1317,7 +1320,7 @@
       // Add the attribute multipliers container as a separate row
       const attrRow = el("tr", "");
       const attrTd = el("td", "py-0 pr-1", "");
-      attrTd.colSpan = 9; // Span across all columns
+      attrTd.colSpan = 10; // Span across all columns
       attrTd.appendChild(attrMultipliersContainer);
       attrRow.appendChild(attrTd);
       tbody.appendChild(attrRow);
@@ -1845,7 +1848,9 @@
       compact.c = data.core.map(attr => {
         const c = {};
         if (shouldInclude(attr.base)) c.b = attr.base;
+        if (shouldInclude(attr.race)) c.r = attr.race;
         if (shouldInclude(attr.mod)) c.m = attr.mod;
+        if (shouldInclude(attr.item)) c.w = attr.item;
         if (shouldInclude(attr.temp)) c.t = attr.temp;
         if (shouldInclude(attr.level)) c.l = attr.level;
         if (shouldInclude(attr.mult)) c.u = attr.mult;
@@ -1861,6 +1866,7 @@
         const c = {};
         if (shouldInclude(attr.base)) c.b = attr.base;
         if (shouldInclude(attr.mod)) c.m = attr.mod;
+        if (shouldInclude(attr.item)) c.w = attr.item;
         if (shouldInclude(attr.temp)) c.t = attr.temp;
         if (shouldInclude(attr.attrCount) && attr.attrCount !== "0") c.c = attr.attrCount;
         if (attr.attrMultipliers && attr.attrMultipliers.length > 0) {
@@ -2026,7 +2032,9 @@
     if (compact.c && Array.isArray(compact.c)) {
       data.core = compact.c.map(attr => ({
         base: safeValue(attr.b),
+        race: safeValue(attr.r),
         mod: safeValue(attr.m),
+        item: safeValue(attr.w),
         temp: safeValue(attr.t),
         level: safeValue(attr.l),
         mult: safeValue(attr.u, "1"),
@@ -2039,6 +2047,7 @@
       data.calc = compact.k.map(attr => ({
         base: safeValue(attr.b),
         mod: safeValue(attr.m),
+        item: safeValue(attr.w),
         temp: safeValue(attr.t),
         attrCount: safeValue(attr.c, "0"),
         attrMultipliers: (attr.a && Array.isArray(attr.a)) ? attr.a.map(am => ({
@@ -2214,14 +2223,16 @@
     const coreRows = document.querySelectorAll('#coreAttributes tr');
     coreRows.forEach((row) => {
       const inputs = row.querySelectorAll('input');
-      if (inputs.length >= 6) {
+      if (inputs.length >= 8) {
         data.core.push({
           base: inputs[0].value || "",
-          mod: inputs[1].value || "",
-          temp: inputs[2].value || "",
-          level: inputs[3].value || "",
-          mult: inputs[4].value || "",
-          total: inputs[5].value || ""
+          race: inputs[1].value || "",
+          mod: inputs[2].value || "",
+          item: inputs[3].value || "",
+          temp: inputs[4].value || "",
+          level: inputs[5].value || "",
+          mult: inputs[6].value || "",
+          total: inputs[7].value || ""
         });
       }
     });
@@ -2234,9 +2245,9 @@
       if (index % 2 === 1) return;
       
       const inputs = row.querySelectorAll('input');
-      if (inputs.length >= 6) {
+      if (inputs.length >= 7) {
         const extraInput = row.querySelector('td:nth-last-child(2) input'); // Second to last column
-        const attrCount = inputs[3].value || "0";
+        const attrCount = inputs[4].value || "0";
         
         // Collect attribute multipliers from the next row
         const attrMultipliers = [];
@@ -2261,11 +2272,12 @@
         data.calc.push({
           base: inputs[0].value || "",
           mod: inputs[1].value || "",
-          temp: inputs[2].value || "",
+          item: inputs[2].value || "",
+          temp: inputs[3].value || "",
           attrCount: attrCount,
           attrMultipliers: attrMultipliers,
-          mult: inputs[4].value || "",
-          end: inputs[5].value || "",
+          mult: inputs[5].value || "",
+          end: inputs[6].value || "",
           extra: extraInput ? extraInput.value || "" : ""
         });
         currentAttrIndex++;
@@ -2586,13 +2598,15 @@
         data.core.forEach((attr, i) => {
           if (coreRows[i]) {
             const inputs = coreRows[i].querySelectorAll('input');
-            if (inputs.length >= 6) {
+            if (inputs.length >= 8) {
               inputs[0].value = safeValue(attr.base);
-              inputs[1].value = safeValue(attr.mod);
-              inputs[2].value = safeValue(attr.temp);
-              inputs[3].value = safeValue(attr.level);
-              inputs[4].value = safeValue(attr.mult, "1");
-              inputs[5].value = safeValue(attr.total);
+              inputs[1].value = safeValue(attr.race);
+              inputs[2].value = safeValue(attr.mod);
+              inputs[3].value = safeValue(attr.item);
+              inputs[4].value = safeValue(attr.temp);
+              inputs[5].value = safeValue(attr.level);
+              inputs[6].value = safeValue(attr.mult, "1");
+              inputs[7].value = safeValue(attr.total);
             }
           }
         });
@@ -2605,13 +2619,14 @@
           const rowIndex = i * 2; // Main rows are at even indices
           if (calcRows[rowIndex]) {
             const inputs = calcRows[rowIndex].querySelectorAll('input');
-            if (inputs.length >= 6) {
+            if (inputs.length >= 7) {
               inputs[0].value = safeValue(attr.base);
               inputs[1].value = safeValue(attr.mod);
-              inputs[2].value = safeValue(attr.temp);
-              inputs[3].value = safeValue(attr.attrCount, "0"); // Attribute count defaults to "0"
-              inputs[4].value = safeValue(attr.mult);
-              inputs[5].value = safeValue(attr.end);
+              inputs[2].value = safeValue(attr.item);
+              inputs[3].value = safeValue(attr.temp);
+              inputs[4].value = safeValue(attr.attrCount, "0"); // Attribute count defaults to "0"
+              inputs[5].value = safeValue(attr.mult);
+              inputs[6].value = safeValue(attr.end);
             }
             const extraInput = calcRows[rowIndex].querySelector('td:nth-last-child(2) input');
             if (extraInput) {
@@ -2621,7 +2636,7 @@
             // Import attribute multipliers
             if (attr.attrMultipliers && attr.attrMultipliers.length > 0) {
               // Trigger the updateAttrMultipliers function by setting the count
-              const attrCountInput = inputs[3];
+              const attrCountInput = inputs[4];
               attrCountInput.value = safeValue(attr.attrCount, "0");
               attrCountInput.dispatchEvent(new Event('input'));
               
