@@ -1836,6 +1836,7 @@
     if (shouldInclude(data.name)) compact.n = data.name;
     if (shouldInclude(data.level)) compact.l = data.level;
     if (shouldInclude(data.exp)) compact.e = data.exp;
+    if (shouldInclude(data.lurcks)) compact.z = data.lurcks;
     if (shouldInclude(data.race)) compact.r = data.race;
     if (shouldInclude(data.masteryValue)) compact.v = data.masteryValue;
     
@@ -2003,6 +2004,7 @@
       name: safeValue(compact.n),
       level: safeValue(compact.l),
       exp: safeValue(compact.e),
+      lurcks: safeValue(compact.z),
       race: safeValue(compact.r),
       core: [],
       calc: [],
@@ -2176,6 +2178,7 @@
       name: document.getElementById("charName").value || "",
       level: document.getElementById("level").value || "",
       exp: document.getElementById("exp").value || "",
+      lurcks: (document.getElementById("lurcks") && document.getElementById("lurcks").value) || "",
       race: document.getElementById("race").value || "",
       
       // Core attributes
@@ -2573,6 +2576,8 @@
       document.getElementById("charName").value = safeValue(data.name);
       document.getElementById("level").value = safeValue(data.level);
       document.getElementById("exp").value = safeValue(data.exp);
+      const lurcksEl = document.getElementById("lurcks");
+      if (lurcksEl && data.lurcks !== undefined) lurcksEl.value = safeValue(data.lurcks);
       document.getElementById("race").value = safeValue(data.race);
 
       // Import core attributes
@@ -2879,6 +2884,8 @@
     document.getElementById("charName").value = "";
     document.getElementById("level").value = "";
     document.getElementById("exp").value = "";
+    const lurcksEl = document.getElementById("lurcks");
+    if (lurcksEl) lurcksEl.value = "";
     document.getElementById("race").value = "";
     
     // Clear all input fields
