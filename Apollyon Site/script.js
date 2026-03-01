@@ -1091,30 +1091,36 @@
 
   /** Build the core attributes table body. */
   function buildCoreAttributes(tbody) {
+    const coreRecalcs = [];
     CORE_ATTRS.forEach((label) => {
-      const tr = el("tr", "border-t");
+      const tr = el("tr", "border-t align-middle");
       tr.appendChild(el("td", "py-2 pr-2 font-medium", label));
 
       const base = input({ type: "number", value: 0, min: 0 });
       const mod = input({ type: "number", value: 0 });
       const temp = input({ type: "number", value: 0 });
       const level = input({ type: "number", value: 0 });
+      const mult = input({ type: "number", value: 1, step: "0.01", max: 9.99, className: "w-14" });
       const total = input({ type: "number", value: 0, readOnly: true });
 
       const recalc = () => {
-        total.value = Number(base.value || 0) + Number(mod.value || 0) + Number(temp.value || 0) + Number(level.value || 0);
+        const sum = Number(base.value || 0) + Number(mod.value || 0) + Number(temp.value || 0) + Number(level.value || 0);
+        const m = Number(mult.value || 1);
+        total.value = Math.ceil(sum * m);
       };
-      [base, mod, temp, level].forEach((i) => i.addEventListener("input", recalc));
+
+      [base, mod, temp, level, mult].forEach((ctrl) => ctrl.addEventListener("input", recalc));
+      coreRecalcs.push(recalc);
       recalc();
 
-      [base, mod, temp, level, total].forEach((ctrl) => {
+      [base, mod, temp, level, mult, total].forEach((ctrl) => {
         const td = el("td", "py-1 pr-1");
         td.appendChild(ctrl);
         tr.appendChild(td);
       });
-
       tbody.appendChild(tr);
     });
+    tbody.addEventListener("input", () => coreRecalcs.forEach((f) => f()));
   }
 
   /** Build the calculated attributes table body. */
@@ -1215,23 +1221,23 @@
         // Calculate base values for specific attributes
         if (def.key === "Max HP") {
           // Base HP = 6 × Grit Total + 30
-          const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit is 3rd core attribute
-          const gritTotal = gritRow ? gritRow.querySelectorAll('input')[4].value || 0 : 0; // Total is 5th input (after adding Level)
+          const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit
+          const gritTotal = gritRow ? gritRow.querySelectorAll('input')[5].value || 0 : 0;
           base.value = 6 * Number(gritTotal) + 30;
         } else if (def.key === "BP") {
           // Base BP = 2 × Spirit Total + 2
-          const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit is 4th core attribute
-          const spiritTotal = spiritRow ? spiritRow.querySelectorAll('input')[4].value || 0 : 0; // Total is 5th input (after adding Level)
+          const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit
+          const spiritTotal = spiritRow ? spiritRow.querySelectorAll('input')[5].value || 0 : 0;
           base.value = 2 * Number(spiritTotal) + 2;
         } else if (def.key === "AC") {
           // Base AC = 10 + Agility Total
-          const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility is 2nd core attribute
-          const agilityTotal = agilityRow ? agilityRow.querySelectorAll('input')[4].value || 0 : 0; // Total is 5th input (after adding Level)
+          const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility
+          const agilityTotal = agilityRow ? agilityRow.querySelectorAll('input')[5].value || 0 : 0;
           base.value = 10 + Number(agilityTotal);
         } else if (def.key === "Speed") {
           // Base Speed = Speed Total
-          const speedRow = document.querySelector('#coreAttributes tr:nth-child(5)'); // Speed is 5th core attribute
-          const speedTotal = speedRow ? speedRow.querySelectorAll('input')[4].value || 0 : 0; // Total is 5th input (after adding Level)
+          const speedRow = document.querySelector('#coreAttributes tr:nth-child(5)'); // Speed
+          const speedTotal = speedRow ? speedRow.querySelectorAll('input')[5].value || 0 : 0;
           base.value = Number(speedTotal);
         }
         
@@ -1249,17 +1255,17 @@
             // Get the corresponding core attribute value
             let coreAttrValue = 0;
             if (attrType === "Str") {
-              const strengthRow = document.querySelector('#coreAttributes tr:nth-child(1)'); // Strength is 1st core attribute
-              coreAttrValue = strengthRow ? Number(strengthRow.querySelectorAll('input')[4].value || 0) : 0;
+              const strengthRow = document.querySelector('#coreAttributes tr:nth-child(1)'); // Strength
+              coreAttrValue = strengthRow ? Number(strengthRow.querySelectorAll('input')[5].value || 0) : 0;
             } else if (attrType === "Agi") {
-              const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility is 2nd core attribute
-              coreAttrValue = agilityRow ? Number(agilityRow.querySelectorAll('input')[4].value || 0) : 0;
+              const agilityRow = document.querySelector('#coreAttributes tr:nth-child(2)'); // Agility
+              coreAttrValue = agilityRow ? Number(agilityRow.querySelectorAll('input')[5].value || 0) : 0;
             } else if (attrType === "Gri") {
-              const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit is 3rd core attribute
-              coreAttrValue = gritRow ? Number(gritRow.querySelectorAll('input')[4].value || 0) : 0;
+              const gritRow = document.querySelector('#coreAttributes tr:nth-child(3)'); // Grit
+              coreAttrValue = gritRow ? Number(gritRow.querySelectorAll('input')[5].value || 0) : 0;
             } else if (attrType === "Spi") {
-              const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit is 4th core attribute
-              coreAttrValue = spiritRow ? Number(spiritRow.querySelectorAll('input')[4].value || 0) : 0;
+              const spiritRow = document.querySelector('#coreAttributes tr:nth-child(4)'); // Spirit
+              coreAttrValue = spiritRow ? Number(spiritRow.querySelectorAll('input')[5].value || 0) : 0;
             }
             
             attrSum += coreAttrValue * multiplier;
@@ -1646,18 +1652,15 @@
       }
     };
     
-    // Create form fields in a grid layout (only 2 columns: Name and Effect)
-    const fieldsContainer = el("div", "grid grid-cols-2 gap-2 pr-8");
-    
-    const nameField = input({ placeholder: "Name", className: "w-full" });
-    const effectField = input({ placeholder: "Effect", className: "w-full" });
-    
-    fieldsContainer.appendChild(nameField);
-    fieldsContainer.appendChild(effectField);
-    
+    const nameField = input({ placeholder: "Name", className: "w-full text-sm font-light border-b border-white/10 bg-transparent rounded-none px-0 py-1 mb-2 focus:ring-0 focus:border-cyan-300/50" });
+    const effectField = textarea({ placeholder: "Effect (paragraph)", rows: 4, className: "mastery-effect w-full min-h-[6rem] rounded-xl px-4 py-3 cell ring-0 ring-transparent focus:ring-2 focus:ring-cyan-300 resize-y text-sm leading-relaxed" });
+    const contentWrap = el("div", "pr-8");
+    contentWrap.appendChild(nameField);
+    contentWrap.appendChild(effectField);
+
     // Assemble the mastery
     newMastery.appendChild(deleteBtn);
-    newMastery.appendChild(fieldsContainer);
+    newMastery.appendChild(contentWrap);
     masteries.appendChild(newMastery);
     
     // Add drag handle
@@ -1674,48 +1677,71 @@
     newTrigger.className = "p-4 rounded-xl border border-white/10 bg-white/5 relative";
     newTrigger.id = `trigger-${Date.now()}`;
     
-    // Create delete button for the entire trigger card
     const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
     deleteBtn.innerHTML = "×";
     deleteBtn.title = "Delete trigger";
     deleteBtn.onclick = () => newTrigger.remove();
     
-    // Create trigger name input (large)
-    const nameField = input({ placeholder: "Trigger Name", className: "w-full text-lg font-semibold mb-3" });
+    const nameField = input({ placeholder: "Trigger Name", className: "trigger-name w-full text-sm font-light border-b border-white/10 bg-transparent rounded-none px-0 py-1 mb-2 focus:ring-0 focus:border-cyan-300/50" });
+    const elementsField = textarea({ placeholder: "Elements (paragraph or one per line)", rows: 4, className: "trigger-elements w-full min-h-[6rem] rounded-xl px-4 py-3 cell ring-0 ring-transparent focus:ring-2 focus:ring-cyan-300 resize-y text-sm leading-relaxed" });
+    const contentWrap = el("div", "pr-8");
+    contentWrap.appendChild(nameField);
+    contentWrap.appendChild(elementsField);
     
-    // Create elements container
-    const elementsContainer = el("div", "space-y-2 mb-3");
-    elementsContainer.id = `trigger-elements-${Date.now()}`;
-    
-    // Create add element button
-    const addElementBtn = el("button", "w-full rounded-lg px-3 py-2 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30 text-cyan-300 text-sm");
-    addElementBtn.textContent = "Add Element";
-    addElementBtn.onclick = () => addTriggerElement(elementsContainer);
-    
-    // Assemble the trigger card
     newTrigger.appendChild(deleteBtn);
-    newTrigger.appendChild(nameField);
-    newTrigger.appendChild(elementsContainer);
-    newTrigger.appendChild(addElementBtn);
+    newTrigger.appendChild(contentWrap);
     triggers.appendChild(newTrigger);
-    
-    // Add drag handle
     addDragHandle(newTrigger);
   }
 
-  /** Add a new element to a trigger card. */
+  /** Add a new element to a trigger card (used when importing legacy multi-element data). */
   function addTriggerElement(container) {
     const elementDiv = el("div", "flex gap-2 items-center p-2 rounded-lg bg-gray-800/30 border border-white/5");
-    
     const elementInput = input({ placeholder: "Element", className: "flex-1" });
     const deleteElementBtn = el("button", "w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
     deleteElementBtn.innerHTML = "×";
     deleteElementBtn.title = "Delete element";
     deleteElementBtn.onclick = () => elementDiv.remove();
-    
     elementDiv.appendChild(elementInput);
     elementDiv.appendChild(deleteElementBtn);
     container.appendChild(elementDiv);
+  }
+
+  const CASTING_TOKEN_TYPES = ["Arcane", "Astral", "Blood", "Elemental", "Fate", "Hollow", "Pact", "Phantasm", "Rune", "Shadow", "Soul", "Void"];
+
+  /** Add a new casting token row (number + type dropdown). */
+  function addCastingToken() {
+    const container = document.getElementById("castingTokens");
+    const row = el("div", "flex gap-2 items-center p-2 rounded-xl border border-white/10 bg-white/5");
+    const numInput = input({ type: "number", value: 1, min: 1, className: "w-16 rounded-lg px-2 py-1.5 cell text-center" });
+    const typeSelect = select(CASTING_TOKEN_TYPES, { className: "flex-1 cell rounded-lg px-3 py-1.5" });
+    const deleteBtn = el("button", "w-6 h-6 flex-shrink-0 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
+    deleteBtn.innerHTML = "×";
+    deleteBtn.title = "Remove token";
+    deleteBtn.onclick = () => row.remove();
+    row.appendChild(numInput);
+    row.appendChild(typeSelect);
+    row.appendChild(deleteBtn);
+    container.appendChild(row);
+  }
+
+  /** Add a new spell (thin name + effect paragraph textarea). */
+  function addSpell() {
+    const container = document.getElementById("spells");
+    const card = el("div", "p-4 rounded-xl border border-white/10 bg-white/5 relative");
+    card.id = `spell-${Date.now()}`;
+    const deleteBtn = el("button", "absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20 border border-red-300/30 hover:bg-red-500/30 text-red-300 hover:text-red-200 transition-colors");
+    deleteBtn.innerHTML = "×";
+    deleteBtn.title = "Remove spell";
+    deleteBtn.onclick = () => card.remove();
+    const nameField = input({ placeholder: "Spell name", className: "spell-name w-full text-sm font-light border-b border-white/10 bg-transparent rounded-none px-0 py-1 mb-2 focus:ring-0 focus:border-cyan-300/50" });
+    const effectField = textarea({ placeholder: "Effect (paragraph)", rows: 4, className: "spell-effect w-full min-h-[6rem] rounded-xl px-4 py-3 cell ring-0 ring-transparent focus:ring-2 focus:ring-cyan-300 resize-y text-sm leading-relaxed" });
+    const contentWrap = el("div", "pr-8");
+    contentWrap.appendChild(nameField);
+    contentWrap.appendChild(effectField);
+    card.appendChild(deleteBtn);
+    card.appendChild(contentWrap);
+    container.appendChild(card);
   }
 
   /** Update mastery delete button visibility based on number of masteries. */
@@ -1821,6 +1847,7 @@
         if (shouldInclude(attr.mod)) c.m = attr.mod;
         if (shouldInclude(attr.temp)) c.t = attr.temp;
         if (shouldInclude(attr.level)) c.l = attr.level;
+        if (shouldInclude(attr.mult)) c.u = attr.mult;
         if (shouldInclude(attr.total)) c.o = attr.total;
         return c;
       }).filter(c => Object.keys(c).length > 0);
@@ -1941,6 +1968,30 @@
       if (compact.b.length === 0) delete compact.b;
     }
     
+    // Casting tokens
+    if (data.castingTokens && data.castingTokens.length > 0) {
+      compact.x = data.castingTokens.map(tok => {
+        const c = {};
+        if (shouldInclude(tok.count)) c.n = tok.count;
+        if (shouldInclude(tok.type)) c.k = tok.type;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.x.length === 0) delete compact.x;
+    }
+    // Spells
+    if (data.spells && data.spells.length > 0) {
+      compact.y = data.spells.map(sp => {
+        const c = {};
+        if (shouldInclude(sp.name)) c.n = sp.name;
+        if (shouldInclude(sp.effect)) c.e = sp.effect;
+        return c;
+      }).filter(c => Object.keys(c).length > 0);
+      if (compact.y.length === 0) delete compact.y;
+    }
+    // Backstory & Important information
+    if (shouldInclude(data.backstory)) compact.s = data.backstory;
+    if (shouldInclude(data.importantInfo)) compact.p = data.importantInfo;
+    
     return compact;
   }
 
@@ -1961,8 +2012,12 @@
       masteries: [],
       masteryValue: safeValue(compact.v),
       triggers: [],
+      castingTokens: [],
+      spells: [],
       mindAlterations: [],
-      mindBreaks: []
+      mindBreaks: [],
+      backstory: safeValue(compact.s),
+      importantInfo: safeValue(compact.p)
     };
     
     // Core attributes
@@ -1972,10 +2027,11 @@
         mod: safeValue(attr.m),
         temp: safeValue(attr.t),
         level: safeValue(attr.l),
+        mult: safeValue(attr.u, "1"),
         total: safeValue(attr.o)
       }));
     }
-    
+
     // Calculated attributes
     if (compact.k && Array.isArray(compact.k)) {
       data.calc = compact.k.map(attr => ({
@@ -2059,6 +2115,20 @@
       }));
     }
     
+    // Casting tokens
+    if (compact.x && Array.isArray(compact.x)) {
+      data.castingTokens = compact.x.map(tok => ({
+        count: safeValue(tok.n, "1"),
+        type: safeValue(tok.k)
+      }));
+    }
+    // Spells
+    if (compact.y && Array.isArray(compact.y)) {
+      data.spells = compact.y.map(sp => ({
+        name: safeValue(sp.n),
+        effect: safeValue(sp.e)
+      }));
+    }
     // Mind alterations
     if (compact.a && Array.isArray(compact.a)) {
       data.mindAlterations = compact.a.map(alt => ({
@@ -2124,23 +2194,31 @@
       masteryValue: "",
       // Triggers
       triggers: [],
+      // Casting tokens
+      castingTokens: [],
+      // Spells
+      spells: [],
       // Mind alterations
       mindAlterations: [],
       // Mind breaks
-      mindBreaks: []
+      mindBreaks: [],
+      // Backstory & Important information
+      backstory: "",
+      importantInfo: ""
     };
 
     // Collect core attributes
     const coreRows = document.querySelectorAll('#coreAttributes tr');
-    coreRows.forEach(row => {
+    coreRows.forEach((row) => {
       const inputs = row.querySelectorAll('input');
-      if (inputs.length >= 5) {
+      if (inputs.length >= 6) {
         data.core.push({
           base: inputs[0].value || "",
           mod: inputs[1].value || "",
           temp: inputs[2].value || "",
           level: inputs[3].value || "",
-          total: inputs[4].value || ""
+          mult: inputs[4].value || "",
+          total: inputs[5].value || ""
         });
       }
     });
@@ -2161,7 +2239,7 @@
         const attrMultipliers = [];
         const nextRow = calcRows[index + 1];
         if (nextRow && Number(attrCount) > 0) {
-          const attrMultipliersContainer = nextRow.querySelector('td div.mt-2');
+          const attrMultipliersContainer = nextRow.querySelector('td div.mt-1');
           if (attrMultipliersContainer) {
             const multiplierGroups = attrMultipliersContainer.querySelectorAll('div.flex.gap-1');
             multiplierGroups.forEach(group => {
@@ -2260,7 +2338,7 @@
     // Collect masteries
     const masteryItems = document.querySelectorAll('#masteries > div');
     masteryItems.forEach(item => {
-      const inputs = item.querySelectorAll('input');
+      const inputs = item.querySelectorAll('input, textarea');
       if (inputs.length >= 2) {
         data.masteries.push({
           name: inputs[0].value || "",
@@ -2275,23 +2353,42 @@
     // Collect triggers
     const triggerItems = document.querySelectorAll('#triggers > div');
     triggerItems.forEach(trigger => {
-      const nameInput = trigger.querySelector('input[placeholder="Trigger Name"]');
-      const elementsContainer = trigger.querySelector('div[class*="space-y-2"]');
-      const elements = [];
-      
-      if (elementsContainer) {
-        const elementInputs = elementsContainer.querySelectorAll('input[placeholder="Element"]');
-        elementInputs.forEach(input => {
-          if (input.value.trim()) {
-            elements.push(input.value.trim());
-          }
+      const nameInput = trigger.querySelector('input.trigger-name, input[placeholder="Trigger Name"]');
+      const elementsField = trigger.querySelector('textarea.trigger-elements, textarea');
+      let elements = [];
+      if (elementsField && elementsField.value.trim()) {
+        elements = elementsField.value.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      }
+      if (nameInput || elementsField) {
+        data.triggers.push({
+          name: nameInput ? nameInput.value || "" : "",
+          elements: elements
         });
       }
-      
-      if (nameInput) {
-        data.triggers.push({
-          name: nameInput.value || "",
-          elements: elements
+    });
+
+    // Collect casting tokens
+    const castingTokenRows = document.querySelectorAll('#castingTokens > div');
+    castingTokenRows.forEach((row) => {
+      const numInput = row.querySelector('input[type="number"]');
+      const typeSelect = row.querySelector('select');
+      if (numInput && typeSelect) {
+        data.castingTokens.push({
+          count: numInput.value || "1",
+          type: typeSelect.value || ""
+        });
+      }
+    });
+
+    // Collect spells
+    const spellCards = document.querySelectorAll('#spells > div');
+    spellCards.forEach((card) => {
+      const nameInput = card.querySelector('input.spell-name, input[placeholder="Spell name"]');
+      const effectField = card.querySelector('textarea.spell-effect, textarea');
+      if (nameInput || effectField) {
+        data.spells.push({
+          name: nameInput ? nameInput.value || "" : "",
+          effect: effectField ? effectField.value || "" : ""
         });
       }
     });
@@ -2319,6 +2416,12 @@
         });
       }
     });
+
+    // Collect backstory & important information
+    const backstoryEl = document.getElementById("backstory");
+    const importantInfoEl = document.getElementById("importantInfo");
+    if (backstoryEl) data.backstory = backstoryEl.value || "";
+    if (importantInfoEl) data.importantInfo = importantInfoEl.value || "";
 
     // Convert to compact format and remove empty values
     const compactData = toCompactFormat(data);
@@ -2478,12 +2581,13 @@
         data.core.forEach((attr, i) => {
           if (coreRows[i]) {
             const inputs = coreRows[i].querySelectorAll('input');
-            if (inputs.length >= 5) {
+            if (inputs.length >= 6) {
               inputs[0].value = safeValue(attr.base);
               inputs[1].value = safeValue(attr.mod);
               inputs[2].value = safeValue(attr.temp);
               inputs[3].value = safeValue(attr.level);
-              inputs[4].value = safeValue(attr.total);
+              inputs[4].value = safeValue(attr.mult, "1");
+              inputs[5].value = safeValue(attr.total);
             }
           }
         });
@@ -2520,15 +2624,21 @@
               setTimeout(() => {
                 const nextRow = calcRows[rowIndex + 1];
                 if (nextRow) {
-                  const attrMultipliersContainer = nextRow.querySelector('td div.mt-2');
+                  const attrMultipliersContainer = nextRow.querySelector('td div.mt-1');
                   if (attrMultipliersContainer) {
                     const multiplierGroups = attrMultipliersContainer.querySelectorAll('div.flex.gap-1');
                     attr.attrMultipliers.forEach((attrMult, multIndex) => {
                       if (multiplierGroups[multIndex]) {
                         const attrSelect = multiplierGroups[multIndex].querySelector('select');
                         const multInput = multiplierGroups[multIndex].querySelector('input[type="number"]');
-                        if (attrSelect) attrSelect.value = safeValue(attrMult.attr);
-                        if (multInput) multInput.value = safeValue(attrMult.mult);
+                        if (attrSelect) {
+                          attrSelect.value = safeValue(attrMult.attr);
+                          attrSelect.dispatchEvent(new Event('input'));
+                        }
+                        if (multInput) {
+                          multInput.value = safeValue(attrMult.mult);
+                          multInput.dispatchEvent(new Event('input'));
+                        }
                       }
                     });
                   }
@@ -2644,7 +2754,7 @@
           addMastery();
           const lastMastery = document.querySelector('#masteries > div:last-child');
           if (lastMastery) {
-            const inputs = lastMastery.querySelectorAll('input');
+            const inputs = lastMastery.querySelectorAll('input, textarea');
             if (inputs.length >= 2) {
               inputs[0].value = mastery.name || "";
               inputs[1].value = mastery.effect || "";
@@ -2665,22 +2775,42 @@
           addTrigger();
           const lastTrigger = document.querySelector('#triggers > div:last-child');
           if (lastTrigger) {
-            const nameInput = lastTrigger.querySelector('input[placeholder="Trigger Name"]');
-            const elementsContainer = lastTrigger.querySelector('div[class*="space-y-2"]');
-            
-            if (nameInput) {
-              nameInput.value = trigger.name || "";
+            const nameInput = lastTrigger.querySelector('input.trigger-name, input[placeholder="Trigger Name"]');
+            const elementsField = lastTrigger.querySelector('textarea.trigger-elements, textarea');
+            if (nameInput) nameInput.value = trigger.name || "";
+            if (elementsField && trigger.elements && trigger.elements.length > 0) {
+              elementsField.value = trigger.elements.join("\n");
             }
-            
-            if (elementsContainer && trigger.elements) {
-              trigger.elements.forEach(element => {
-                addTriggerElement(elementsContainer);
-                const lastElement = elementsContainer.querySelector('div:last-child input');
-                if (lastElement) {
-                  lastElement.value = element;
-                }
-              });
-            }
+          }
+        });
+      }
+
+      // Import casting tokens
+      if (data.castingTokens) {
+        clearContainer('#castingTokens');
+        data.castingTokens.forEach(tok => {
+          addCastingToken();
+          const lastRow = document.querySelector('#castingTokens > div:last-child');
+          if (lastRow) {
+            const numInput = lastRow.querySelector('input[type="number"]');
+            const typeSelect = lastRow.querySelector('select');
+            if (numInput) numInput.value = tok.count !== undefined ? tok.count : "1";
+            if (typeSelect && tok.type) typeSelect.value = tok.type;
+          }
+        });
+      }
+
+      // Import spells
+      if (data.spells) {
+        clearContainer('#spells');
+        data.spells.forEach(spell => {
+          addSpell();
+          const lastSpell = document.querySelector('#spells > div:last-child');
+          if (lastSpell) {
+            const nameInput = lastSpell.querySelector('input.spell-name, input[placeholder="Spell name"]');
+            const effectField = lastSpell.querySelector('textarea.spell-effect, textarea');
+            if (nameInput) nameInput.value = spell.name || "";
+            if (effectField) effectField.value = spell.effect || "";
           }
         });
       }
@@ -2729,6 +2859,12 @@
         });
       }
 
+      // Import backstory & important information
+      const backstoryEl = document.getElementById("backstory");
+      const importantInfoEl = document.getElementById("importantInfo");
+      if (backstoryEl && data.backstory !== undefined) backstoryEl.value = data.backstory || "";
+      if (importantInfoEl && data.importantInfo !== undefined) importantInfoEl.value = data.importantInfo || "";
+
       alert("Character imported successfully!");
       
     } catch (error) {
@@ -2757,6 +2893,8 @@
     clearContainer('#enhancements');
     clearContainer('#masteries');
     clearContainer('#triggers');
+    clearContainer('#castingTokens');
+    clearContainer('#spells');
     clearContainer('#mindAlterations');
     clearContainer('#mindBreaks');
     
@@ -3256,6 +3394,8 @@ function populateImportedAbilities(abilitiesWrap, moteSelect, abilitiesData) {
   window.addMastery = addMastery;
   window.addMindAlteration = addMindAlteration;
   window.addTrigger = addTrigger;
+  window.addCastingToken = addCastingToken;
+  window.addSpell = addSpell;
 
   // =============================
   // Initialize the page
