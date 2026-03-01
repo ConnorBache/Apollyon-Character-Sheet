@@ -187,7 +187,7 @@
       <!-- Core Attributes -->
       <div class="card rounded-2xl p-6">
         <h3 class="text-lg font-semibold mb-4">Attributes</h3>
-        <table class="w-full text-sm">
+        <table class="w-full text-sm align-middle">
           <thead class="text-left subtle">
             <tr>
               <th class="pb-2 w-20">Attribute</th>
@@ -195,6 +195,7 @@
               <th class="pb-2 w-12">Mod</th>
               <th class="pb-2 w-12">Temp</th>
               <th class="pb-2 w-12">Level</th>
+              <th class="pb-2 w-10">× Mult</th>
               <th class="pb-2 w-12">Total</th>
             </tr>
           </thead>
@@ -234,8 +235,8 @@
       </div>
     </section>
 
-    <!-- Inventory, Enhancements, Mastery & Triggers -->
-    <section class="grid xl:grid-cols-4 gap-6 mt-6">
+    <!-- Inventory & Enhancements -->
+    <section class="grid xl:grid-cols-2 gap-6 mt-6">
       <!-- Inventory -->
       <div class="card rounded-2xl p-6 section-dynamic" id="inventory-section">
         <h3 class="text-lg font-semibold mb-4">Inventory</h3>
@@ -253,7 +254,10 @@
         </div>
         <button id="addEnhancement" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addEnhancement()">Add Enhancement</button>
       </div>
+    </section>
 
+    <!-- Mastery & Triggers (each ~half width) -->
+    <section class="grid xl:grid-cols-2 gap-6 mt-6">
       <!-- Mastery -->
       <div class="card rounded-2xl p-6 section-dynamic" id="mastery-section">
         <div class="flex items-center gap-3 mb-4">
@@ -276,6 +280,24 @@
       </div>
     </section>
 
+    <!-- Casting Tokens & Spells -->
+    <section class="grid xl:grid-cols-2 gap-6 mt-6">
+      <div class="card rounded-2xl p-6 section-dynamic" id="casting-tokens-section">
+        <h3 class="text-lg font-semibold mb-4">Casting Tokens</h3>
+        <div id="castingTokens" class="space-y-3 section-content">
+          <!-- Casting token rows added by script -->
+        </div>
+        <button id="addCastingToken" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addCastingToken()">Add Casting Token</button>
+      </div>
+      <div class="card rounded-2xl p-6 section-dynamic" id="spells-section">
+        <h3 class="text-lg font-semibold mb-4">Spells</h3>
+        <div id="spells" class="space-y-3 section-content">
+          <!-- Spell cards added by script -->
+        </div>
+        <button id="addSpell" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addSpell()">Learn Spell</button>
+      </div>
+    </section>
+
     <!-- Mind Alterations & Breaks -->
     <section class="grid lg:grid-cols-2 gap-6 mt-6">
       <div class="card rounded-2xl p-6">
@@ -292,6 +314,18 @@
           <!-- Mind break cards will be added here dynamically -->
         </div>
         <button id="addMindBreak" class="mt-4 rounded-xl px-4 py-2.5 bg-cyan-500/20 border border-cyan-300/30 hover:bg-cyan-500/30" onclick="addMindBreak()">Add Mind Break</button>
+      </div>
+    </section>
+
+    <!-- Backstory & Important Information -->
+    <section class="grid lg:grid-cols-2 gap-6 mt-6">
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-lg font-semibold mb-4">Backstory</h3>
+        <textarea id="backstory" rows="6" class="cell w-full rounded-xl px-4 py-3 ring-0 ring-transparent focus:ring-2 focus:ring-cyan-300 resize-y" placeholder="Character backstory..."></textarea>
+      </div>
+      <div class="card rounded-2xl p-6">
+        <h3 class="text-lg font-semibold mb-4">Important Information</h3>
+        <textarea id="importantInfo" rows="6" class="cell w-full rounded-xl px-4 py-3 ring-0 ring-transparent focus:ring-2 focus:ring-cyan-300 resize-y" placeholder="Notes, important details, etc."></textarea>
       </div>
     </section>
 
